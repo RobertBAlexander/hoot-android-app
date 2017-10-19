@@ -1,0 +1,33 @@
+<resources>
+    //Welcome.java
+    <string name="app_name">MyHootApp</string>
+    <string name="hootText">Hoot Hoot</string>
+    <string name="welcomeLogin">Login</string>
+    <string name="welcomeSignup">Sign up</string>
+
+    //Hoot page
+    <string name="submitHoot">Toot that Hoot</string>
+
+    //Dropdown menu
+    <string name="menuSettings">Settings</string>
+    <string name="menuReport">Report</string>
+    <string name="menuLogout">Logout</string>
+
+    //Reports page
+    <string name="reportTitle">Report</string>
+
+    //Signup page
+    <string name="SignupTitle">Sign up to Hoot at People</string>
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="signupButton">Sign Up</string>
+
+    //Login page
+    <string name="hootLogin">Log IN to Hoot OUT</string>
+    <string name="loginEmail">E-mail</string>
+    <string name="loginPassword">Password</string>
+    <string name="loginButton">Log In</string>
+
+</resources>
