@@ -1,4 +1,4 @@
-package app.hoot;
+package app.hoot.activity;
 /**
  * Created by Robert Alexander on 18/10/2017.
  */
@@ -7,6 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import app.hoot.main.HootApp;
+import app.hoot.R;
+import app.hoot.model.User;
 
 public class Signup extends AppCompatActivity {
     //private Button signupRegisterButton;

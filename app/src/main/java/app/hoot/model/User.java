@@ -1,4 +1,4 @@
-package app.hoot;
+package app.hoot.model;
 
 /**
  * Created by Robert Alexander on 18/10/2017.

@@ -1,4 +1,4 @@
-package app.hoot;
+package app.hoot.activity;
 /**
  * Created by Robert Alexander on 16/10/2017.
  */

@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name="app.hoot.HootApp">
+        android:name="app.hoot.main.HootApp">
         <activity
-            android:name=".Welcome"
+            android:name=".activity.Welcome"
             android:label="@string/hootText">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,16 +20,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Hoot"
+            android:name=".activity.Hoot"
             android:label="@string/hootText" />
         <activity
-            android:name=".Report"
+            android:name=".activity.Report"
             android:label="@string/hootText" />
         <activity
-            android:name=".Signup"
+            android:name=".activity.Signup"
             android:label="@string/app_name" />
         <activity
-            android:name=".Login"
+            android:name=".activity.Login"
             android:label="@string/app_name"/>
     </application>
 

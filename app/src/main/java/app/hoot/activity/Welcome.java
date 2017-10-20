@@ -1,9 +1,11 @@
-package app.hoot;
+package app.hoot.activity;
 /**
  * Created by Robert Alexander on 18/10/2017.
  */
 
 import app.hoot.R;
+import app.hoot.activity.Login;
+import app.hoot.activity.Signup;
 
 import android.content.Intent;
 import android.os.Bundle;
