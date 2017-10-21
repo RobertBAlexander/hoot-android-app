@@ -1,38 +1,87 @@
 package app.hoot.activity;
 
 /**
- * Created by rober on 21/10/2017.
+ * Created by Robert Alexander on 21/10/2017.
  */
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
-import static app.hoot.helpers.IntentHelper.startActivityWithData;
-import static app.hoot.helpers.IntentHelper.startActivityWithDataForResult;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import app.hoot.R;
+import app.hoot.model.Hoot;
 
-public class AddHoot extends AppCompatActivity {
-    private Button submitHoot;
+public class AddHoot extends Base implements
+        View.OnClickListener {
+    private String hootActual, hashtag;
+    private String user;
+    private String hootDate;
+    private EditText hootContent;
+    private Spinner spinner;
+    private TextView Date;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hoot);
+        setContentView(R.layout.activity_addhoot);
 
-        submitHoot = (Button)findViewById(R.id.submitHoot);
+        Button saveButton = (Button) findViewById(R.id.submitHoot);
+        hootContent = (EditText) findViewById(R.id.hootContent);
 
-        if(submitHoot != null)
+        //spinner array Reference: https://stackoverflow.com/questions/9768919/how-to-use-spinner-and-fill-it-from-array-in-android
+        spinner = (Spinner) findViewById(R.id.addHashtagSpinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this, R.array.hashtags_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        //Date Reference: https://stackoverflow.com/questions/12934661/android-get-current-date-and-show-it-in-textview
+        Date = (TextView) findViewById(R.id.addHootDate);
+        String theDate = DateFormat.getDateInstance().format(new Date());
+        Date.setText(theDate);
+
+        userId = "Placeholder userId";
+        saveButton.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        hootActual = hootContent.getText().toString();
+        //Get spinn string Reference: https://stackoverflow.com/questions/10331854/how-to-get-spinner-selected-item-value-to-string
+        hashtag = spinner.getSelectedItem().toString();
+        user = userId;
+        hootDate = Date.toString();
+
+        if ((hootActual.length() > 0) && hootActual.length() < 140)
         {
-            Log.v("Hoot", "got the submit hoot button");
+            //Hoot h = new Hoot(hootActual, hashtag, user, hootDate);
+            //app.hootList.add(c);
+            //goToActivity(this, Home.class, null);
         }
+        else
+        {
+            Toast.makeText(
+                    this,
+                    "Your tweet must be between 1 and 140 characters in length",
+                    Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     public void submitHootPressed (View view)
@@ -49,6 +98,14 @@ public class AddHoot extends AppCompatActivity {
                 portfolio.addHoot(hoot);
                 startActivityWithDataForResult(this, AddHoot.class, "RESIDENCE_ID", hoot.id, 0);
                 return true;*/
+                    /*else
+            {
+                //Vibrate Reference: https://stackoverflow.com/questions/13950338/how-to-make-an-android-device-vibrate
+                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                // Vibrate for 900 milliseconds
+                v.vibrate(900);
+                Toast.makeText(this, "Invalid Hoot, please try again", Toast.LENGTH_SHORT).show();
+            }*/
 
             case R.id.menuReport:
                 startActivity (new Intent(this, Report.class));
@@ -69,4 +126,6 @@ public class AddHoot extends AppCompatActivity {
         inflater.inflate(R.menu.menu_hoot, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
+
 }

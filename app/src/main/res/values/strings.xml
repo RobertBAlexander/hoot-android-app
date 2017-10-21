@@ -1,4 +1,8 @@
 <resources>
+    //Version
+    <string name="versionLabel">Current Version:</string>
+    <string name="version">1</string>
+
     //Welcome.java
     <string name="app_name">MyHootApp</string>
     <string name="hootText">Hoot Hoot</string>
@@ -7,6 +11,16 @@
 
     //Add Hoot page
     <string name="submitHoot">Toot that Hoot</string>
+    <string name="hashtag_prompt">Choose a hashtag</string>
+    <string-array name="hashtags_array">
+        <item> </item>
+        <item>Hoot Topic</item>
+        <item>Owlcoholics</item>
+        <item>Orly?</item>
+        <item>Night Snacks</item>
+        <item>Beak Airful</item>
+    </string-array>
+
 
     //Dropdown menu and action bar
     <string name="menuSettings">Settings</string>
@@ -30,5 +44,11 @@
     <string name="loginEmail">E-mail</string>
     <string name="loginPassword">Password</string>
     <string name="loginButton">Log In</string>
+
+    //Info page
+    <string name="appDesc">Hoot Hootallows the user to create Hoots. These are similar to tweets, but you make them at night!</string>
+    <string name="appMoreInfo">For more information about the Hoot Hoot app or to provide feedback please talk to me in person. I sit over in the corner near Brian and John.</string>
+    <string name="hootContent">Hoot it Here!</string>
+    <string name="addHootDate">Date Display</string>
 
 </resources>
