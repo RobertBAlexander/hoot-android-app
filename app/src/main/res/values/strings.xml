@@ -5,13 +5,14 @@
     <string name="welcomeLogin">Login</string>
     <string name="welcomeSignup">Sign up</string>
 
-    //Hoot page
+    //Add Hoot page
     <string name="submitHoot">Toot that Hoot</string>
 
-    //Dropdown menu
+    //Dropdown menu and action bar
     <string name="menuSettings">Settings</string>
     <string name="menuReport">Report</string>
     <string name="menuLogout">Logout</string>
+    <string name="new_hoot">New Hoot</string>
 
     //Reports page
     <string name="reportTitle">Report</string>

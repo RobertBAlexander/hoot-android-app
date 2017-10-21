@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.hoot.model.User;
+//import app.hoot.model.AddHoot;
 
 public class HootApp extends Application {
     public List<User> users = new ArrayList<>();
+    //public List<AddHoot> hoots = new ArrayList<>();
 
     public void newUser(User user)
     {
@@ -34,7 +36,7 @@ public class HootApp extends Application {
     public void onCreate()
     {
         super.onCreate();
-        Log.v("Donate", "Donation App Started");
+        Log.v("Hoot", "Hoot Hoot App Started");
     }
 
 

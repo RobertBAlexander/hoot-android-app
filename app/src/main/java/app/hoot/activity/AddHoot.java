@@ -1,7 +1,9 @@
 package app.hoot.activity;
+
 /**
- * Created by Robert Alexander on 16/10/2017.
+ * Created by rober on 21/10/2017.
  */
+
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,10 +14,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import static app.hoot.helpers.IntentHelper.startActivityWithData;
+import static app.hoot.helpers.IntentHelper.startActivityWithDataForResult;
 
 import app.hoot.R;
 
-public class Hoot extends AppCompatActivity {
+public class AddHoot extends AppCompatActivity {
     private Button submitHoot;
 
     @Override
@@ -41,6 +45,11 @@ public class Hoot extends AppCompatActivity {
     {
         switch (item.getItemId())
         {
+            /*case R.id.menu_item_new_hoot: AddHoot hoot = new AddHoot();
+                portfolio.addHoot(hoot);
+                startActivityWithDataForResult(this, AddHoot.class, "RESIDENCE_ID", hoot.id, 0);
+                return true;*/
+
             case R.id.menuReport:
                 startActivity (new Intent(this, Report.class));
                 break;

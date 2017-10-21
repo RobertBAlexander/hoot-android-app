@@ -11,8 +11,10 @@
         android:theme="@style/AppTheme"
         android:name="app.hoot.main.HootApp">
         <activity
-            android:name=".activity.Welcome"
-            android:label="@string/hootText">
+            android:name=".activity.Splash"
+            android:label="@string/hootText"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +22,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.Hoot"
+            android:name=".activity.Welcome"
+
+
+
+            android:label="@string/hootText" />
+        <activity
+            android:name=".activity.AddHoot"
             android:label="@string/hootText" />
         <activity
             android:name=".activity.Report"

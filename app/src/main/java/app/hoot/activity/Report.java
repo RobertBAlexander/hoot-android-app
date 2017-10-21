@@ -38,7 +38,7 @@ public class Report extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId())
         {
-            case R.id.hootText:   startActivity(new Intent(this, Hoot.class));
+            case R.id.hootText:   startActivity(new Intent(this, AddHoot.class));
                 break;
             case R.id.menuSettings: Toast.makeText(this, "Settings Selected", Toast.LENGTH_SHORT).show();
                 break;
