@@ -19,8 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import java.util.Locale;
 
 import app.hoot.R;
 import app.hoot.model.Hoot;
@@ -33,7 +34,8 @@ public class AddHoot extends Base implements
     private EditText hootContent;
     private Spinner spinner;
     private TextView Date;
-    private String userId;
+    private String fullDate;
+    private Long userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +51,19 @@ public class AddHoot extends Base implements
                 this, R.array.hashtags_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        hashtag = spinner.toString();
 
         //Date Reference: https://stackoverflow.com/questions/12934661/android-get-current-date-and-show-it-in-textview
+        //And: https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings
+        //However additional modifications were made
         Date = (TextView) findViewById(R.id.addHootDate);
-        String theDate = DateFormat.getDateInstance().format(new Date());
-        Date.setText(theDate);
+        //String theDate = DateFormat.getDateInstance(DateFormat.FULL, Locale.UK).format(new Date());
+        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+        fullDate = currentDateTimeString;
 
-        userId = "Placeholder userId";
+        Date.setText(currentDateTimeString.substring(0, 17));
+
+        userId = 123456789L;
         saveButton.setOnClickListener(this);
 
     }
@@ -63,16 +71,28 @@ public class AddHoot extends Base implements
     @Override
     public void onClick(View view) {
         hootActual = hootContent.getText().toString();
-        //Get spinn string Reference: https://stackoverflow.com/questions/10331854/how-to-get-spinner-selected-item-value-to-string
+        //Get spinner string Reference: https://stackoverflow.com/questions/10331854/how-to-get-spinner-selected-item-value-to-string
         hashtag = spinner.getSelectedItem().toString();
-        user = userId;
+        //user = userId;
         hootDate = Date.toString();
 
         if ((hootActual.length() > 0) && hootActual.length() < 140)
         {
-            //Hoot h = new Hoot(hootActual, hashtag, user, hootDate);
-            //app.hootList.add(c);
-            //goToActivity(this, Home.class, null);
+            Hoot h = new Hoot(hootActual, hashtag, fullDate, userId);
+            app.hootList.add(h);
+            goToActivity(this, Signup.class, null);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!This is only temporary until it runs. Must change to home, when created!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+            Log.v("Hoot", "Submit Hoot Pressed!"); //Test Hoot button functionality
         }
         else
         {

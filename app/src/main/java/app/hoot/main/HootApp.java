@@ -9,11 +9,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.hoot.model.User;
-//import app.hoot.model.AddHoot;
+import app.hoot.model.Hoot;
 
 public class HootApp extends Application {
     public List<User> users = new ArrayList<>();
-    //public List<AddHoot> hoots = new ArrayList<>();
+    public List<Hoot> hootList = new ArrayList<Hoot>();
+    protected static HootApp app;
+
+
+    @Override
+    public void onCreate()
+    {
+        super.onCreate();
+        app = this;
+        Log.v("Hoot", "Hoot Hoot App Started");
+    }
 
     public void newUser(User user)
     {
@@ -32,14 +42,8 @@ public class HootApp extends Application {
         return false;
     }
 
-    @Override
-    public void onCreate()
-    {
-        super.onCreate();
-        Log.v("Hoot", "Hoot Hoot App Started");
+    public static HootApp getApp() {
+        return app;
     }
-
-
-
 
 }

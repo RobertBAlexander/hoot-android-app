@@ -4,7 +4,7 @@
     <string name="version">1</string>
 
     //Welcome.java
-    <string name="app_name">MyHootApp</string>
+    <string name="app_name">HootApp</string>
     <string name="hootText">Hoot Hoot</string>
     <string name="welcomeLogin">Login</string>
     <string name="welcomeSignup">Sign up</string>
