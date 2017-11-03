@@ -29,7 +29,7 @@ public class Login extends AppCompatActivity {
 
         if (app.validUser(email.getText().toString(), password.getText().toString()))
         {
-            startActivity (new Intent(this, AddHoot.class));
+            startActivity (new Intent(this, ChronologyActivity.class));
         }
         else
         {

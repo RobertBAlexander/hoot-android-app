@@ -63,9 +63,10 @@ public class ChronologySerializer {
             InputStream in = mContext.openFileInput(mFilename);
             reader = new BufferedReader(new InputStreamReader(in));
             StringBuilder jsonString = new StringBuilder();
-            String line = null;
+            String line;
             while ((line = reader.readLine()) != null)
             {
+                // read file into a string
                 // line breaks are omitted and irrelevant
                 jsonString.append(line);
             }

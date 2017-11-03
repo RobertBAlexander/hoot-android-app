@@ -35,6 +35,6 @@ public class Signup extends AppCompatActivity {
         HootApp app = (HootApp) getApplication();
         app.newUser(user);
 
-        startActivity (new Intent(this, AddHoot.class));
+        startActivity (new Intent(this, ChronologyActivity.class));
     }
 }

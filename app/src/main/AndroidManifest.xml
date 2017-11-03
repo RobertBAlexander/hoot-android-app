@@ -23,22 +23,42 @@
         </activity>
         <activity
             android:name=".activity.Welcome"
-
-
-
-            android:label="@string/hootText" />
+            android:label="Welcome"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.AddHoot"
-            android:label="@string/hootText" />
+            android:label="AddHoot"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.Home"
+            android:label="Home"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.Report"
-            android:label="@string/hootText" />
+            android:label="Report"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.Signup"
-            android:label="@string/app_name" />
+            android:label="Signup"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.Login"
-            android:label="@string/app_name"/>
+            android:label="Login"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.ChronologyActivity"
+            android:label="TimeLine"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".settings.Settings"
+            android:label="Settings"
+            android:screenOrientation="portrait">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.ChronologyActivity" />
+        </activity>
+
     </application>
 
 </manifest>

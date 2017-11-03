@@ -13,21 +13,35 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-public class Welcome extends AppCompatActivity
-{
+import static app.hoot.helpers.LogHelpers.info;
+
+public class Welcome extends AppCompatActivity implements View.OnClickListener {
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
+        final Button loginButton = (Button) findViewById(R.id.welcomeLogin);
+        final Button signupButton = (Button) findViewById(R.id.welcomeSignup);
+
+        loginButton.setOnClickListener(this);
+        signupButton.setOnClickListener(this);
 
     }
-    public void loginPressed (View view)
-    {
-        startActivity (new Intent(this, Login.class));
-    }
-    public void signupPressed(View view) {
-        startActivity(new Intent(this, Signup.class));
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.welcomeLogin:
+                info(this, "Login Pressed");
+                startActivity(new Intent(this, Login.class));
+                break;
+
+
+            case R.id.welcomeSignup:
+                info(this, "Signup Pressed");
+                startActivity(new Intent(this, Signup.class));
+                break;
+        }
     }
 }

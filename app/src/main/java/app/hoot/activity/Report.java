@@ -12,9 +12,39 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class Report extends AppCompatActivity
-{
+import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.DatePicker;
+import android.widget.EditText;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+import android.app.DatePickerDialog;
+import android.view.View;
+import android.view.View.OnClickListener;
+
+import app.hoot.main.HootApp;
+import app.hoot.model.Chronology;
+import app.hoot.model.Hoot;
+
+public class Report extends AppCompatActivity implements TextWatcher,
+        OnCheckedChangeListener,
+        View.OnClickListener,
+        DatePickerDialog.OnDateSetListener {
     ListView listView;
+    private Hoot hoot;
+    private Button dateButton;
+    private Chronology chronology;
+    private EditText hootActual;
+
 
     static final String[] numbers = new String[] {
             "Amount, Pay method",
@@ -46,5 +76,35 @@ public class Report extends AppCompatActivity
                 break;
         }
         return true;
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
     }
 }

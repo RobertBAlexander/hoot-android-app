@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.content.ContentResolver;
+import android.widget.Toast;
 
 //Class Reference: S Drohan lab android-myrent-2017. V7.0
 public class ContactHelper {
@@ -36,10 +37,10 @@ public class ContactHelper {
 
         Uri contactUri = data.getData();
         ContentResolver cr = context.getContentResolver();
-
+        String[] queryFields = new String[]{ContactsContract.Contacts.DISPLAY_NAME};
         Cursor cur = cr.query(contactUri, null, null, null, null);
 
-        if (cur.getCount() > 0)
+        if (cur.getCount() == 0)
         {
             try
             {

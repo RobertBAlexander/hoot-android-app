@@ -10,9 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import app.hoot.R;
 import app.hoot.fragments.ChronologyFragment;
-import app.hoot.fragments.HootFragment;
 
-public class AddHoot extends AppCompatActivity {
+public class ChronologyActivity extends AppCompatActivity {
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -21,7 +20,7 @@ public class AddHoot extends AppCompatActivity {
         FragmentManager manager = getSupportFragmentManager();
         Fragment fragment = manager.findFragmentById(R.id.fragmentContainer);
         if (fragment == null) {
-            fragment = new HootFragment();
+            fragment = new ChronologyFragment();
             manager.beginTransaction().add(R.id.fragmentContainer, fragment).commit();
         }
     }

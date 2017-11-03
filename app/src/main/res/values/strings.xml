@@ -11,7 +11,10 @@
 
     //Add Hoot page
     <string name="submitHoot">Toot that Hoot</string>
-    <string name="hashtag_prompt">Choose a hashtag</string>
+    <string name="hoot_button">Toot that Hoot</string>
+    <string name="contact_button">Select Contact</string>
+    <string name="email_button">Send Email with Hoot</string>
+    <string name="hashtag_prompt">Choose a Hashtag</string>
     <string-array name="hashtags_array">
         <item> </item>
         <item>Hoot Topic</item>
@@ -27,9 +30,15 @@
     <string name="menuReport">Report</string>
     <string name="menuLogout">Logout</string>
     <string name="new_hoot">New Hoot</string>
+    <string name="menu">Menu</string>
+    <string name="chronology">Chronology</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
 
-    //Reports page
+    //Reports or timeline page
     <string name="reportTitle">Report</string>
+    <string name="delete_hoot">Delete Hoot</string>
+    <string name="date"> </string>
 
     //Signup page
     <string name="SignupTitle">Sign up to Hoot at People</string>
@@ -46,9 +55,35 @@
     <string name="loginButton">Log In</string>
 
     //Info page
-    <string name="appDesc">Hoot Hootallows the user to create Hoots. These are similar to tweets, but you make them at night!</string>
+    <string name="appDesc">Hoot Hoot allows the user to create Hoots. These are similar to tweets, but you make them at night!</string>
     <string name="appMoreInfo">For more information about the Hoot Hoot app or to provide feedback please talk to me in person. I sit over in the corner near Brian and John.</string>
     <string name="hootContent">Hoot it Here!</string>
     <string name="addHootDate">Date Display</string>
+
+    /other for now
+    <string name="searchHootsLbl">Search Hoot\'s</string>
+    <string name="favouritesHootLbl">Favourite Hoot\'s</string>
+    <string name="addAHootLbl">Hoot Check In</string>
+    <string name="updateAHootLbl">Update a Hoot</string>
+    <string name="addHootBtnLbl">Add Hoot</string>
+    <string name="updateHootBtnLbl">Update Hoot</string>
+    <string name="saveHootBtn">Save Hoot</string>
+    <string name="recentlyViewedLbl">Recently Added Hoot\'s</string>
+    <string name="hootNameLbl">Name :</string>
+    <string name="hootShopLbl">Shop :</string>
+    <string name="hootPriceLbl">Price :</string>
+    <string name="hootRatingLbl">Star Rating</string>
+    <string name="hootDetailsLbl">Full Hoot Details</string>
+    <string name="searchHootNameHint">Enter a Hoot Title </string>
+    <string name="informationLbl">Information</string>
+    <string name="recentlyViewedListEmptyMessage">You have no Hoot\'s added, go have a hoot!</string>
+    <string name="deleteHootsLbl">Delete Hoot\'s</string>
+    <string name="appWebsite">appWebsite</string>
+    <string name="email_subject">Hoot to you</string>
+
+    //Help page
+    <string name="appHelpTitle">Hoot Hoot Help</string>
+    <string name="appHelp">This is the help screen for the Hoot app</string>
+    <string name="appHelpExtra">Basically\, if you need help on using this app, you probably shouldn\'t be using it</string>
 
 </resources>
