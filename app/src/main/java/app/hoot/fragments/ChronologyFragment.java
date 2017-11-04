@@ -171,7 +171,7 @@ public class ChronologyFragment extends ListFragment implements AdapterView.OnIt
     public void onItemCheckedStateChanged(ActionMode actionMode, int position, long id, boolean checked) {
     }
 
-
+//Reference: lab 3b S Drohan
     class HootAdapter extends ArrayAdapter<Hoot> {
         private Context context;
 

@@ -13,6 +13,8 @@ import app.hoot.fragments.ChronologyFragment;
 
 public class ChronologyActivity extends AppCompatActivity {
 
+    //private ListView listView;
+    //private Chronology chronology;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,5 +26,6 @@ public class ChronologyActivity extends AppCompatActivity {
             manager.beginTransaction().add(R.id.fragmentContainer, fragment).commit();
         }
     }
+
 
 }

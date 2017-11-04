@@ -37,7 +37,7 @@ public class ContactHelper {
 
         Uri contactUri = data.getData();
         ContentResolver cr = context.getContentResolver();
-        String[] queryFields = new String[]{ContactsContract.Contacts.DISPLAY_NAME};
+        //String[] queryFields = new String[]{ContactsContract.Contacts.DISPLAY_NAME};
         Cursor cur = cr.query(contactUri, null, null, null, null);
 
         if (cur.getCount() == 0)

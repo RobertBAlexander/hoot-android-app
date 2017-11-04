@@ -30,8 +30,7 @@
     <EditText
         android:id="@+id/hootContent"
         android:layout_width="225dp"
-        android:layout_height="212dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="110dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="16dp"
         android:ems="10"

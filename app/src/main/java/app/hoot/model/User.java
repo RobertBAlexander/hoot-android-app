@@ -6,6 +6,7 @@ package app.hoot.model;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.UUID;
 import java.util.Random;
 
 //Core Reference: lab 4a S Drohan
