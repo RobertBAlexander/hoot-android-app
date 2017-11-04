@@ -6,6 +6,7 @@ package app.hoot.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.app.ListFragment;
 import android.support.v4.app.Fragment;
@@ -82,6 +83,7 @@ public class HootFragment extends Fragment implements TextWatcher,
     public TextView date;
     private Button emailButton;
     private Button contactButton;
+    private TextView countdown;
 
     private Hoot   hoot;
     private Chronology chronology;
@@ -133,20 +135,49 @@ public class HootFragment extends Fragment implements TextWatcher,
 
         return view;
     }
-
+//Reference for countdown: https://stackoverflow.com/questions/24110265/android-create-count-down-word-field-when-user-type-in-edittext
     private void addListeners(View view) {
         hootContent  = view.findViewById(R.id.hootContent);
         hootButton   = view.findViewById(R.id.submitHoot);
         date =   view.findViewById(R.id.addHootDate);
         emailButton = view.findViewById(R.id.emailButton);
         contactButton = view.findViewById(R.id.contactButton);
+        countdown = view.findViewById(R.id.countdown);
 
-
+        countdown.setText(String.valueOf(140));
         hootContent .addTextChangedListener(this);
         hootButton  .setOnClickListener(this);
         date  .setOnClickListener(this);
-       // emailButton.setOnClickListener(this);
-       // contactButton.setOnClickListener(this);
+        emailButton.setOnClickListener(this);
+        contactButton.setOnClickListener(this);
+
+        hootContent.addTextChangedListener(new TextWatcher() {
+
+            //Reference for colour change. Sadly it didn't work: https://stackoverflow.com/questions/16430656/change-text-color-based-based-on-value-of-text
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                countdown.setText(String.valueOf(140 - (hootContent.getText().toString().length())));
+/*                int countcolour = Integer.parseInt(countdown.toString());
+                if (countcolour >= 1) {
+                    countdown.setTextColor(Color.BLUE);
+                } else if (countcolour == 0) {
+                    countdown.setTextColor(Color.YELLOW);
+                } else {
+                        countdown.setTextColor(Color.RED);
+                    }*/
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private void updateControls(Hoot hoot) {
@@ -214,12 +245,15 @@ public class HootFragment extends Fragment implements TextWatcher,
         {
 
             case R.id.submitHoot :                     //should this be hootButton?
+                if (hootContent.getText().length() > 140) {
+                    Toast.makeText(app.getApplicationContext(), "This hoot it way... way too long. Kind of like this notification. Try 140 characters or less", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                        else if(hootContent.getText().length() > 0) {
+                hoot.hootContent = hootContent.getText().toString();
                 Toast.makeText(getActivity(), "Successful: " + hoot.hootContent, Toast.LENGTH_LONG).show();
-                getActivity().finish();
-                chronology.saveHoots();
-                if (hootContent.getText().length() > 0) {
-
-
+                    getActivity().finish();
+                    chronology.saveHoots();
                     break;
                 } else {
                     Toast.makeText(app.getApplicationContext(), "You need to write something for your hoot.", Toast.LENGTH_SHORT).show();
@@ -266,8 +300,7 @@ public class HootFragment extends Fragment implements TextWatcher,
         }
     }
 
-    //TODO !!!! This does not have a contact, so need to figure another way of getting this to work.
-    //TODO !!!also needs another class for full permissions
+    //TODO !!!! This has a contact, but e-mail does not come back.
     private void readContact() {
         String name = getContact(getActivity(), data);
         emailAddress = getEmail(getActivity(), data);

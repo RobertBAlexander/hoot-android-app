@@ -16,7 +16,8 @@ import app.hoot.model.Chronology;
 
 public class Signup extends AppCompatActivity {
     //private Button signupRegisterButton;
-    private Chronology chronology;
+    //private Chronology chronology;
+    public HootApp app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,7 @@ public class Signup extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        chronology.saveUsers();
+        //app.chronology.saveUsers();
     }
 
 }

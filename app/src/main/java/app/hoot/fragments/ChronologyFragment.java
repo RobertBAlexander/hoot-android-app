@@ -94,7 +94,7 @@ public class ChronologyFragment extends ListFragment implements AdapterView.OnIt
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_new_hoot:
-                Toast.makeText(getActivity(), "Button pressed", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Button pressed", Toast.LENGTH_SHORT).show();
                 Hoot hoot = new Hoot();
                 chronology.addHoot(hoot);
 
@@ -180,6 +180,8 @@ public class ChronologyFragment extends ListFragment implements AdapterView.OnIt
             this.context = context;
         }
 
+        //Reference for removing new lines: https://stackoverflow.com/questions/11221491/how-to-make-multiple-line-string-to-single-line-string
+        //Reference for reducing string length to 30: https://stackoverflow.com/questions/1199352/smart-way-to-shorten-long-strings-with-javascript
 
         @SuppressLint("InflateParams")
         @Override
@@ -192,7 +194,7 @@ public class ChronologyFragment extends ListFragment implements AdapterView.OnIt
 
             TextView messageView = convertView.findViewById(R.id.chronology_item_hoot);
             assert hoot != null;
-            messageView.setText(hoot.hootContent);
+            messageView.setText(hoot.hootContent.replaceAll("[\r\n]+", " ").substring(0, 30));
 
             TextView dateView = convertView.findViewById(R.id.chronology_item_dateTextView);
             dateView.setText(hoot.getFullDate());

@@ -40,10 +40,9 @@ public class ContactHelper {
         //String[] queryFields = new String[]{ContactsContract.Contacts.DISPLAY_NAME};
         Cursor cur = cr.query(contactUri, null, null, null, null);
 
-        if (cur.getCount() == 0)
+        if (cur.getCount() > 0)
         {
-            try
-            {
+            try {
                 cur.moveToFirst();
                 String contactId = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
                 Cursor emails = cr.query(ContactsContract.CommonDataKinds.Email.CONTENT_URI, null,

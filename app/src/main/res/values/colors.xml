@@ -25,4 +25,9 @@
     <color name="appFooterFontColor">#606060</color>
     <color name="textBGColor">#008FFE</color>
 
+    <!-- Basic Colours -->
+    <color name="BLUE">#0000ff</color>
+    <color name="RED">#ff0000</color>
+    <color name="YELLOW">#ffff00</color>
+
 </resources>
