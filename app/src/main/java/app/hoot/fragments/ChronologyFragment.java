@@ -29,11 +29,13 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import app.hoot.activity.AddHoot;
+import app.hoot.activity.ChronologyActivity;
 import app.hoot.helpers.IntentHelper;
 import app.hoot.main.HootApp;
 import app.hoot.activity.Welcome;
 import app.hoot.model.Chronology;
 import app.hoot.model.Hoot;
+import app.hoot.settings.SettingsActivity;
 
 public class ChronologyFragment extends ListFragment implements AdapterView.OnItemClickListener, AbsListView.MultiChoiceModeListener {
     private ArrayList<Hoot> hoots;
@@ -112,9 +114,17 @@ public class ChronologyFragment extends ListFragment implements AdapterView.OnIt
                 startActivityForResult(i, 0);
                 return true;
 
-/*            case R.id.settings:
+            case R.id.settings:
                 startActivity(new Intent(getActivity(), SettingsActivity.class));
-                return true;*/
+                return true;
+
+            case R.id.clear:
+/*                for (Hoot thisHoot: hoots) {
+                    chronology.deleteHoot(thisHoot);
+                }*/
+                Toast.makeText(app.getApplicationContext(), "Unable to delete hoots at this time, why not multi select the tweets you wish to delete?", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), ChronologyActivity.class));
+                return true;
 
             case R.id.logout:
                 Intent in = new Intent(getActivity(), Welcome.class);

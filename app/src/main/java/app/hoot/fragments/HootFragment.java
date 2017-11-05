@@ -47,6 +47,7 @@ import app.hoot.helpers.IntentHelper;
 import app.hoot.main.HootApp;
 import app.hoot.model.Chronology;
 import app.hoot.model.Hoot;
+import app.hoot.settings.SettingsActivity;
 
 //import app.tweeting.settings.SettingsActivity;   !!!!!!
 
@@ -220,9 +221,9 @@ public class HootFragment extends Fragment implements TextWatcher,
                 startActivity(new Intent(getActivity(),ChronologyActivity.class));
                 return true;
 
-            /*case id.settings:
+            case R.id.settings:
                 startActivity(new Intent(getActivity(), SettingsActivity.class));
-                return true;*/
+                return true;
 
             case R.id.logout:
                 Intent in = new Intent(getActivity(), Welcome.class);
