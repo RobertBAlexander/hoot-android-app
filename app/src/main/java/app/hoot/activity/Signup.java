@@ -18,11 +18,19 @@ public class Signup extends AppCompatActivity {
     //private Button signupRegisterButton;
     //private Chronology chronology;
     public HootApp app;
+    private Chronology chronology;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        Long userId = (Long) (53453458L);
+        //Long userId = (Long) getActivity().getIntent().getSerializableExtra(EXTRA_USER_ID);
+        app = HootApp.getApp();
+        chronology = app.chronology;
+        user = chronology.getUser(userId);
 
         //signupRegisterButton = (Button) findViewById(R.id.signupRegisterButton);
     }
@@ -33,6 +41,7 @@ public class Signup extends AppCompatActivity {
         String lastName  = ((TextView)  findViewById(R.id.lastName)).getText().toString();
         String email     = ((TextView)  findViewById(R.id.signupEmail)).getText().toString();
         String password  = ((TextView)  findViewById(R.id.signupPassword)).getText().toString();
+        Long userId = (294274287L);
 
         HootApp app = (HootApp) getApplication();
 
@@ -47,6 +56,9 @@ public class Signup extends AppCompatActivity {
         else {
             User user = new User(firstName, lastName, email, password);
             app.addUser(user);
+            //user.email = email.toString();
+            //Toast.makeText(this, "Successful creation of: " + user.email, Toast.LENGTH_LONG).show();
+            chronology.saveUsers();
             startActivity(new Intent(this, Welcome.class));
         }
     }

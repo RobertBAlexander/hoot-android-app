@@ -1,8 +1,11 @@
+/*
 package app.hoot.activity;
 
+*/
 /**
  * Created by Robert Alexander on 25/10/2017.
- */
+ *//*
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -58,9 +61,12 @@ public class Home extends Base{
 
     }
 
-    /*public void setupHoots() {
+    */
+/*public void setupHoots() {
         hootList.add(new Hoot("Standard Black", "Some Shop", 2.5, 1.99, false));
         hootList.add(new Hoot("Regular Joe", "Joe's Place", 3.5, 2.99, true));
         hootList.add(new Hoot("Espresso", "Ardkeen Stores", 4.5, 1.49, true));
-    }*/
+    }*//*
+
 }
+*/

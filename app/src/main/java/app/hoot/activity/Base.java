@@ -1,8 +1,11 @@
+/*
 package app.hoot.activity;
 
+*/
 /**
  * Created by Robert Alexander on 21/10/2017.
- */
+ *//*
+/*
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -87,3 +90,4 @@ public class Base extends AppCompatActivity {
 
 
 }
+*/

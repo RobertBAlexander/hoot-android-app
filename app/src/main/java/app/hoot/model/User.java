@@ -3,6 +3,8 @@ package app.hoot.model;
 /**
  * Created by Robert Alexander on 18/10/2017.
  */
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -55,6 +57,7 @@ public class User {
         json.put(JSON_LAST_NAME, lastName);
         json.put(JSON_EMAIL, email);
         json.put(JSON_PASSWORD , password);
+        Log.i(this.getClass().getSimpleName(), "User is created in JSON ");
         return json;
     }
 

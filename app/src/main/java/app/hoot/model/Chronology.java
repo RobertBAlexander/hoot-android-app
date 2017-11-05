@@ -22,7 +22,7 @@ public class Chronology {
         }
         catch (Exception e)
         {
-            info(this, "Error loading userss: " + e.getMessage());
+            info(this, "Error loading users: " + e.getMessage());
             hoots = new ArrayList<Hoot>();
             users = new ArrayList<User>();
         }

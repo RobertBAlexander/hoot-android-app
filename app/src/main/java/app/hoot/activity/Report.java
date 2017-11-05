@@ -1,7 +1,10 @@
+/*
 package app.hoot.activity;
+*/
 /**
  * Created by Robert Alexander on 18/10/2017.
- */
+ *//*
+/*
 import app.hoot.R;
 
 import android.content.Intent;
@@ -107,4 +110,4 @@ public class Report extends AppCompatActivity implements TextWatcher,
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
     }
-}
+}*/

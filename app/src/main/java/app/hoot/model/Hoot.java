@@ -2,6 +2,8 @@ package app.hoot.model;
 /**
  * Created by Robert Alexander on 21/10/2017.
  */
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,7 +22,7 @@ public class Hoot implements Serializable {
 
     private static final String JSON_HOOT_ID             = "hootId"            ;
     private static final String JSON_HOOT_CONTENT             = "hootContent"            ;
-    private static final String JSON_HASHTAG             = "hashtag"            ;
+    //private static final String JSON_HASHTAG             = "hashtag"            ;
     private static final String JSON_FULL_DATE          = "date"            ;
     //private static final String JSON_USER_ID             = "userId"            ;
     private static final String JSON_CONTACT = "contact";
@@ -52,7 +54,7 @@ public class Hoot implements Serializable {
     public Hoot(JSONObject json) throws JSONException{
        // userId = json.getLong(JSON_USER_ID);
         hootContent = json.getString(JSON_HOOT_CONTENT );
-        hashtag = json.getString(JSON_HASHTAG);
+        //hashtag = json.getString(JSON_HASHTAG);
         date = json.getLong(JSON_FULL_DATE);
         hootId = json.getLong(JSON_HOOT_ID);
         contact = json.getString(JSON_CONTACT);
@@ -63,10 +65,11 @@ public class Hoot implements Serializable {
         JSONObject json = new JSONObject();
         //json.put(JSON_USER_ID, Long.toString(userId));
         json.put(JSON_HOOT_CONTENT , hootContent);
-        json.put(JSON_HASHTAG, hashtag);
-        json.put(JSON_FULL_DATE, date);
-        json.put(JSON_HOOT_ID, hootId);
+        //json.put(JSON_HASHTAG, hashtag);
+        json.put(JSON_FULL_DATE, Long.toString(date));
+        json.put(JSON_HOOT_ID, Long.toString(hootId));
         json.put(JSON_CONTACT, contact);
+        Log.i(this.getClass().getSimpleName(), "Hoot is created in JSON ");
         return json;
     }
 

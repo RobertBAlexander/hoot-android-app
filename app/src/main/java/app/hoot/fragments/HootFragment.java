@@ -27,6 +27,8 @@ import app.hoot.model.Hoot;
 import static app.hoot.helpers.ContactHelper.getContact;
 import static app.hoot.helpers.ContactHelper.getEmail;
 import static app.hoot.helpers.ContactHelper.sendEmail;
+import static app.hoot.helpers.IntentHelper.navigateUp;
+//import static app.hoot.helpers.IntentHelper.navigateUp;
 
 
 import android.content.pm.PackageManager;
@@ -69,7 +71,7 @@ import android.widget.Toast;
 
 
 public class HootFragment extends Fragment implements TextWatcher,
-        OnCheckedChangeListener,
+        //OnCheckedChangeListener,
         OnClickListener,
         DatePickerDialog.OnDateSetListener {
 
@@ -126,6 +128,8 @@ public class HootFragment extends Fragment implements TextWatcher,
     {
         super.onCreateView(inflater,  parent, savedInstanceState);
         View view = inflater.inflate(R.layout.activity_addhoot, parent, false);
+        AddHoot addHoot = (AddHoot) getActivity();
+        addHoot.actionBar.setDisplayHomeAsUpEnabled(true);
 
         //AddHoot addHoot = (AddHoot)getActivity();
         //addHoot.actionBar.setDisplayHomeAsUpEnabled(true);
@@ -186,16 +190,12 @@ public class HootFragment extends Fragment implements TextWatcher,
 //        hashtag.setText(hoot.hashtag);
     }
 
-    /*@Override
+/*    @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
         switch (item.getItemId())
         {
-            case android.R.id.home: navigateUp(getActivity());
-                return true;
 
-            default:
-                return super.onOptionsItemSelected(item);
         }
     }*/
 
@@ -208,23 +208,27 @@ public class HootFragment extends Fragment implements TextWatcher,
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home: getActivity().finish();
+                return true;
+
+
             case R.id.chronology:
 
-                if (hoot.hootContent == null) {
+                //if (hoot.hootContent == null) {
                     chronology.deleteHoot(hoot);
-                }
+                //}
                 startActivity(new Intent(getActivity(),ChronologyActivity.class));
                 return true;
 
             /*case id.settings:
                 startActivity(new Intent(getActivity(), SettingsActivity.class));
-                return true;
+                return true;*/
 
-            case id.logout:
+            case R.id.logout:
                 Intent in = new Intent(getActivity(), Welcome.class);
                 in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivityForResult(in, 0);
-                return true;*/
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -235,7 +239,14 @@ public class HootFragment extends Fragment implements TextWatcher,
     public void onPause()
     {
         super.onPause();
-        chronology.saveHoots();
+/*        if (hootContent.getText().toString().length() > 0) {
+            hoot.hootContent = hootContent.getText().toString();
+            IntentHelper.navigateUp(getActivity());
+            chronology.saveHoots();
+        } else {
+            chronology.deleteHoot(hoot);
+        }*/
+       chronology.saveHoots();
     }
 
     @Override
@@ -300,7 +311,7 @@ public class HootFragment extends Fragment implements TextWatcher,
         }
     }
 
-    //TODO !!!! This has a contact, but e-mail does not come back.
+    //TODO !!!also needs another class for full permissions
     private void readContact() {
         String name = getContact(getActivity(), data);
         emailAddress = getEmail(getActivity(), data);
@@ -348,8 +359,8 @@ public class HootFragment extends Fragment implements TextWatcher,
 
     }
 
-    @Override
+/*    @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
         //hoot.rented = isChecked;
-    }
+    }*/
 }

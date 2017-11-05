@@ -51,6 +51,15 @@ public class ChronologyFragment extends ListFragment implements AdapterView.OnIt
 
         app = HootApp.getApp();
         chronology = app.chronology;
+        //Not working, but I don't know why... made
+        if (hoots != null) {
+            for (Hoot hoot : hoots)
+                if (hoot.hootContent.toString().length() == 0) {
+                    chronology.deleteHoot(hoot);
+                }
+        }
+
+
         hoots = chronology.hoots;
 
         adapter = new HootAdapter(getActivity(), hoots);
@@ -194,8 +203,8 @@ public class ChronologyFragment extends ListFragment implements AdapterView.OnIt
 
             TextView messageView = convertView.findViewById(R.id.chronology_item_hoot);
             assert hoot != null;
-            messageView.setText(hoot.hootContent.replaceAll("[\r\n]+", " ").substring(0, 30));
-
+            //messageView.setText(hoot.hootContent.replaceAll("[\r\n]+", " ").substring(0, 30));
+            messageView.setText(hoot.hootContent);
             TextView dateView = convertView.findViewById(R.id.chronology_item_dateTextView);
             dateView.setText(hoot.getFullDate());
             return convertView;
