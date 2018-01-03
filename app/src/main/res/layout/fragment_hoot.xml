@@ -38,7 +38,7 @@
             android:layout_width="179dp"
             android:layout_height="wrap_content"
             android:gravity="start"
-            android:text=""
+            android:text="TextView"
             android:textSize="14sp"
             android:textStyle="bold"
             android:paddingStart="8dp"

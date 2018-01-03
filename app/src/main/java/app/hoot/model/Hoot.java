@@ -111,7 +111,8 @@ public class Hoot implements Serializable {
 
     public String getFullDate()
     {
-        return "this date";
+        String date = "this date";
+        return date;
     }
 
 /*    public String fullDate()

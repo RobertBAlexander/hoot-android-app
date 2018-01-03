@@ -39,7 +39,7 @@
     //Reports or timeline page
     <string name="reportTitle">Report</string>
     <string name="delete_hoot">Delete Hoot</string>
-    <string name="date"> </string>
+    <string name="date"/>
 
     //Signup page
     <string name="SignupTitle">Sign up to Hoot at People</string>
@@ -59,7 +59,7 @@
     <string name="appDesc">Hoot Hoot allows the user to create Hoots. These are similar to tweets, but you make them at night!</string>
     <string name="appMoreInfo">For more information about the Hoot Hoot app or to provide feedback please talk to me in person. I sit over in the corner near Brian and John.</string>
     <string name="hootContent">Hoot it Here!</string>
-    <string name="addHootDate">Date Display</string>
+    <string name="addHootDate"/>
 
     /other for now
     <string name="searchHootsLbl">Search Hoot\'s</string>
@@ -97,6 +97,6 @@
     <string name="set_refresh_interval">Refresh</string>
     <string name="set_refresh_interval_summary">Frequency of cloud updates (minutes)</string>
     <string name="hootWords">hootWords</string>
-    <string name="hootmain">hootmain</string>
+    <string name="hootmain">Enter text here</string>
 
 </resources>

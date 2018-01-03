@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -68,10 +69,13 @@ public class HootOut extends AppCompatActivity implements View.OnClickListener, 
         emailButton = (Button) findViewById(R.id.emailButton);
         contactButton.setOnClickListener(this);
         emailButton.setOnClickListener(this);
-        // https://stackoverflow.com/questions/2271131/display-the-current-time-and-date-in-an-android-application
-        //String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+        // http://www.technotalkative.com/android-get-current-date-and-time-in-different-format/
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss");
+
+        String currentDateTimeString = dateFormat.format(cal.getTime());
         //String currentDateTimeString = "The date";
-        //hootDate.setText(hoot.getFullDate());
+        hootDate.setText(currentDateTimeString);
 
         hootmain.addTextChangedListener(new TextWatcher() {
             @Override
@@ -88,8 +92,8 @@ public class HootOut extends AppCompatActivity implements View.OnClickListener, 
     }
     public void hootButtonPressed (View view) {
         String text = hootmain.getText().toString();
-        //String date = hootDate.getText().toString();
-        String date = "testing without date";
+        String date = hootDate.getText().toString();
+        //String date = "testing without date";
         if(text.equals("")) {
             Toast toast = Toast.makeText(this, "Hoot must contain characters", Toast.LENGTH_SHORT);
             toast.show();
