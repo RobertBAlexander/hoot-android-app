@@ -30,18 +30,22 @@ import java.util.ArrayList;
 
 import app.hoot.activity.AddHoot;
 import app.hoot.activity.ChronologyActivity;
+import app.hoot.activity.HootOut;
 import app.hoot.helpers.IntentHelper;
 import app.hoot.main.HootApp;
 import app.hoot.activity.Welcome;
+import app.hoot.main.HootService;
 import app.hoot.model.Chronology;
 import app.hoot.model.Hoot;
 import app.hoot.settings.SettingsActivity;
+import retrofit2.Call;
 
 public class ChronologyFragment extends ListFragment implements AdapterView.OnItemClickListener, AbsListView.MultiChoiceModeListener {
     private ArrayList<Hoot> hoots;
     private Chronology chronology;
     private HootAdapter adapter;
     private ListView listView;
+    public HootService hootService;
 
     HootApp app;
 
@@ -56,7 +60,7 @@ public class ChronologyFragment extends ListFragment implements AdapterView.OnIt
         //Not working, but I don't know why... made
         if (hoots != null) {
             for (Hoot hoot : hoots)
-                if (hoot.hootContent.toString().length() == 0) {
+                if (hoot.hootmain.toString().length() == 0) {
                     chronology.deleteHoot(hoot);
                 }
         }
@@ -82,7 +86,7 @@ public class ChronologyFragment extends ListFragment implements AdapterView.OnIt
     public void onListItemClick(ListView l, View v, int position, long id) {
         Hoot hoot = ((HootAdapter) getListAdapter()).getItem(position);
         Intent i = new Intent(getActivity(), AddHoot.class);
-        i.putExtra(HootFragment.EXTRA_HOOT_ID, hoot.hootId);
+        i.putExtra(HootFragment.EXTRA_HOOT_ID, hoot._id);
         startActivityForResult(i, 0);
     }
 
@@ -106,12 +110,18 @@ public class ChronologyFragment extends ListFragment implements AdapterView.OnIt
         switch (item.getItemId()) {
             case R.id.menu_item_new_hoot:
                 //Toast.makeText(getActivity(), "Button pressed", Toast.LENGTH_SHORT).show();
-                Hoot hoot = new Hoot();
-                chronology.addHoot(hoot);
+                //Hoot hoot = new Hoot();
+                //chronology.addHoot(hoot);
 
-                Intent i = new Intent(getActivity(), AddHoot.class);
-                i.putExtra(HootFragment.EXTRA_HOOT_ID, hoot.hootId);
-                startActivityForResult(i, 0);
+                //TODO: Remove dependancies on hoots and ids, and instead just link straight to
+                //creation of a hoot. Comment out rest of this button, and see how I get on.
+                Call<Hoot> hoot = hootService.createHoot(new Hoot("Hello",  "date"));//"hashtag",
+
+                //Intent i = new Intent(getActivity(), AddHoot.class);
+                //Intent i = new Intent(getActivity(), HootOut.class);
+                startActivity(new Intent(getActivity(), HootOut.class));
+                //i.putExtra(HootFragment.EXTRA_HOOT_ID, hoot.hashCode());
+                //startActivityForResult(i, 0);
                 return true;
 
             case R.id.settings:
@@ -119,9 +129,9 @@ public class ChronologyFragment extends ListFragment implements AdapterView.OnIt
                 return true;
 
             case R.id.clear:
-/*                for (Hoot thisHoot: hoots) {
+                for (Hoot thisHoot: hoots) {
                     chronology.deleteHoot(thisHoot);
-                }*/
+                }
                 Toast.makeText(app.getApplicationContext(), "Unable to delete hoots at this time, why not multi select the tweets you wish to delete?", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getActivity(), ChronologyActivity.class));
                 return true;
@@ -141,7 +151,7 @@ public class ChronologyFragment extends ListFragment implements AdapterView.OnIt
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Hoot hoot = adapter.getItem(position);
-        IntentHelper.startActivityWithData(getActivity(), AddHoot.class, "HOOT_ID", hoot.hootId);
+        IntentHelper.startActivityWithData(getActivity(), AddHoot.class, "HOOT_ID", hoot._id);
     }
 
     @Override
@@ -214,7 +224,7 @@ public class ChronologyFragment extends ListFragment implements AdapterView.OnIt
             TextView messageView = convertView.findViewById(R.id.chronology_item_hoot);
             assert hoot != null;
             //messageView.setText(hoot.hootContent.replaceAll("[\r\n]+", " ").substring(0, 30));
-            messageView.setText(hoot.hootContent);
+            messageView.setText(hoot.hootmain);
             TextView dateView = convertView.findViewById(R.id.chronology_item_dateTextView);
             dateView.setText(hoot.getFullDate());
             return convertView;

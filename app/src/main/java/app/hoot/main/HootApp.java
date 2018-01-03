@@ -4,12 +4,21 @@ package app.hoot.main;
  */
 import android.app.Application;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import app.hoot.model.User;
 import app.hoot.model.Hoot;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import app.hoot.model.User;
+import app.hoot.model.Hoot;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import app.hoot.model.Chronology;
 import app.hoot.model.ChronologySerializer;
@@ -19,14 +28,39 @@ import static app.hoot.helpers.LogHelpers.info;
 public class HootApp extends Application {
     //public List<User> users = new ArrayList<User>();
     //public List<Hoot> hootList = new ArrayList<Hoot>();
+    public HootService hootService;
+    public boolean         hootServiceAvailable = false;
+    public String          service_url  = "https://hoothoot-web-app.herokuapp.com/";   // Standard Emulator IP Address
+
+    public static User             currentUser;
+    public List <Hoot>  hoots    = new ArrayList<Hoot>();
+    public List <User>      users        = new ArrayList<User>();
+
     protected static HootApp app;
 
     private static final String FILENAMEU = "users.json";
     private static final String FILENAMEH = "hoots.json";
     public Chronology chronology;
 
-
     @Override
+    public void onCreate()
+    {
+        super.onCreate();
+        Gson gson = new GsonBuilder().create();
+        app = this;
+        ChronologySerializer serializer = new ChronologySerializer(this, FILENAMEU, FILENAMEH);
+        chronology = new Chronology(serializer);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(service_url)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        hootService = retrofit.create(HootService.class);
+
+        Log.v("Hoot", "Hoot App Started");
+    }
+
+
+/*    @Override
     public void onCreate()
     {
         super.onCreate();
@@ -34,7 +68,7 @@ public class HootApp extends Application {
         ChronologySerializer serializer = new ChronologySerializer(this, FILENAMEU, FILENAMEH);
         chronology = new Chronology(serializer);
         info(this, "Hoot Hoot App Started");
-    }
+    }*/
 
     public void newUser(User user)
     {
@@ -53,10 +87,11 @@ public class HootApp extends Application {
 
 
     public boolean validUser (String email, String password) {
-        for (User user : chronology.users)
+        for (User user : users)
         {
             if (user.email.equals(email) && user.password.equals(password))
             {
+                currentUser = user;
                 return true;
             }
         }
@@ -65,6 +100,11 @@ public class HootApp extends Application {
 
     public static HootApp getApp() {
         return app;
+    }
+
+    public static String getCurrentUser()
+    {
+        return currentUser._id;
     }
 
 }

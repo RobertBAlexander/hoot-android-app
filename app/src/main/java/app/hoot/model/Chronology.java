@@ -41,20 +41,20 @@ public class Chronology {
     }
 
     //How should id work?
-    public Hoot getHoot(Long id) {
+    public Hoot getHoot(String id) {
         Log.i(this.getClass().getSimpleName(), "Long parameter id: " + id);
         for (Hoot hoot : hoots) {
-            if (id.equals(hoot.hootId)) {
+            if (id.equals(hoot._id)) {
                 return hoot;
             }
         }
         return null;
     }
 
-    public User getUser(Long id) {
+    public User getUser(String id) {
         Log.i(this.getClass().getSimpleName(), "Long parameter id: " + id);
         for (User user : users) {
-            if (id.equals(user.userId)) {
+            if (id.equals(user._id)) {
                 return user;
             }
         }

@@ -13,12 +13,14 @@ import app.hoot.main.HootApp;
 import app.hoot.R;
 import app.hoot.model.User;
 import app.hoot.model.Chronology;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class Signup extends AppCompatActivity {
+public class Signup extends AppCompatActivity implements Callback<User> {
     //private Button signupRegisterButton;
-    //private Chronology chronology;
-    public HootApp app;
     private Chronology chronology;
+    public HootApp app;
     private User user;
 
     @Override
@@ -26,11 +28,12 @@ public class Signup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        Long userId = (Long) (53453458L);
+        //Long userId = (Long) (53453458L);
         //Long userId = (Long) getActivity().getIntent().getSerializableExtra(EXTRA_USER_ID);
         app = HootApp.getApp();
         chronology = app.chronology;
-        user = chronology.getUser(userId);
+        //Removed as may not be needed for future retrieval of user
+        //user = chronology.getUser();
 
         //signupRegisterButton = (Button) findViewById(R.id.signupRegisterButton);
     }
@@ -41,7 +44,7 @@ public class Signup extends AppCompatActivity {
         String lastName  = ((TextView)  findViewById(R.id.lastName)).getText().toString();
         String email     = ((TextView)  findViewById(R.id.signupEmail)).getText().toString();
         String password  = ((TextView)  findViewById(R.id.signupPassword)).getText().toString();
-        Long userId = (294274287L);
+        //Long userId = (294274287L);
 
         HootApp app = (HootApp) getApplication();
 
@@ -56,6 +59,8 @@ public class Signup extends AppCompatActivity {
         else {
             User user = new User(firstName, lastName, email, password);
             app.addUser(user);
+            Call<User> call = (Call<User>) app.hootService.createUser(user);
+            call.enqueue(this);
             //user.email = email.toString();
             //Toast.makeText(this, "Successful creation of: " + user.email, Toast.LENGTH_LONG).show();
             chronology.saveUsers();
@@ -66,7 +71,20 @@ public class Signup extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        //app.chronology.saveUsers();
+        app.chronology.saveUsers();
     }
 
+    @Override
+    public void onResponse(Call<User> call, Response<User> response) {
+        app.users.add(response.body());
+        startActivity(new Intent(this, Welcome.class));
+    }
+
+    @Override
+    public void onFailure(Call<User> call, Throwable t) {
+        app.hootServiceAvailable = false;
+        Toast toast = Toast.makeText(this, "Hoot Service Unavailable. Try again later", Toast.LENGTH_LONG);
+        toast.show();
+        startActivity (new Intent(this, Welcome.class));
+    }
 }

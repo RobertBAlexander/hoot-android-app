@@ -34,7 +34,7 @@ public class HootItem {
     }
 
     private void updateControls(Hoot hoot) {
-        ((TextView) view.findViewById(R.id.chronology_item_hoot)).setText(hoot.hootContent);
+        ((TextView) view.findViewById(R.id.chronology_item_hoot)).setText(hoot.hootmain);
         ((TextView) view.findViewById(R.id.chronology_item_hashtagTextView)).setText(hoot.hashtag);
         ((TextView) view.findViewById(R.id.chronology_item_dateTextView)).setText(hoot.getFullDate());
 

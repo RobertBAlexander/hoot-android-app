@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="app.hoot.activity.AddHoot">
+    tools:context="app.hoot.activity.HootOut">
 
     <TextView
         android:id="@+id/addHootDate"
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="@string/addHootDate"
         android:layout_marginTop="32dp"
-        app:layout_constraintTop_toBottomOf="@+id/hootContent"
+        app:layout_constraintTop_toBottomOf="@+id/hootmain"
         android:layout_marginLeft="24dp"
         app:layout_constraintLeft_toLeftOf="parent" />
 
@@ -38,14 +38,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/hootContent"
+        android:id="@+id/hootmain"
         android:layout_width="225dp"
         android:layout_height="110dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:gravity="top|left"
-        android:hint="@string/hootContent"
+        android:hint="@string/hootmain"
         android:inputType="textMultiLine"
         android:maxLines="4"
         app:layout_constraintHorizontal_bias="0.609"
@@ -63,11 +63,12 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="32dp"
         android:text="@string/submitHoot"
+        android:onClick="hootButtonPressed"
         app:layout_constraintLeft_toRightOf="@+id/hootText"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/hootContent" />
+        app:layout_constraintTop_toBottomOf="@+id/hootmain" />
 
     <Button
         android:id="@+id/contactButton"

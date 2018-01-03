@@ -22,6 +22,7 @@ import app.hoot.R;
 import app.hoot.activity.AddHoot;
 import app.hoot.adapters.HootListAdapter;
 import app.hoot.main.HootApp;
+import app.hoot.main.HootService;
 import app.hoot.model.Chronology;
 import app.hoot.model.Hoot;
 import static app.hoot.helpers.ContactHelper.getContact;
@@ -40,6 +41,8 @@ import android.view.MenuItem;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
+
 import android.app.Activity;
 import app.hoot.activity.ChronologyActivity;
 import app.hoot.activity.Welcome;
@@ -47,7 +50,11 @@ import app.hoot.helpers.IntentHelper;
 import app.hoot.main.HootApp;
 import app.hoot.model.Chronology;
 import app.hoot.model.Hoot;
+import app.hoot.model.User;
 import app.hoot.settings.SettingsActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 //import app.tweeting.settings.SettingsActivity;   !!!!!!
 
@@ -55,6 +62,7 @@ import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.widget.BaseAdapter;
 import android.widget.DatePicker;
 import android.app.DatePickerDialog;
 import android.widget.Button;
@@ -63,6 +71,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -74,7 +83,7 @@ import android.widget.Toast;
 public class HootFragment extends Fragment implements TextWatcher,
         //OnCheckedChangeListener,
         OnClickListener,
-        DatePickerDialog.OnDateSetListener {
+        DatePickerDialog.OnDateSetListener, Callback<Hoot> {
 
     public static final String EXTRA_HOOT_ID = "myhoot.HOOT_ID";
     private static  final int     REQUEST_CONTACT = 1;
@@ -82,7 +91,7 @@ public class HootFragment extends Fragment implements TextWatcher,
     private EditText hootContent;
     private Button   hootButton;
     private Button   deleteHootButton;
-    public EditText hashtag;
+    //public EditText hashtag;
     public TextView date;
     private Button emailButton;
     private Button contactButton;
@@ -90,6 +99,7 @@ public class HootFragment extends Fragment implements TextWatcher,
 
     private Hoot   hoot;
     private Chronology chronology;
+    public HootService hootService;
 
     protected static HootListAdapter listAdapter;
     protected ListView listView;
@@ -98,6 +108,48 @@ public class HootFragment extends Fragment implements TextWatcher,
     // This field is initialized in `onActivityResult`.
     private Intent data;
     HootApp app;
+
+
+/*    private class UserAdapter extends BaseAdapter implements SpinnerAdapter {
+        private final List<User> data;
+
+        public UserAdapter(List<User> data) {
+            this.data = data;
+        }
+
+        @Override
+        public int getCount() {
+            return data.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return data.get(position);
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return i;
+        }
+
+        @Override
+        public View getView(int position, View recycle, ViewGroup parent) {
+            TextView text;
+            if (recycle != null) {
+                text = (TextView) recycle;
+            } else {
+                text = (TextView) getLayoutInflater().inflate(
+                        android.R.layout.simple_dropdown_item_1line, parent, false
+                );
+            }
+            text.setTextColor(Color.BLACK);
+            text.setText(data.get(position).firstName);
+            return text;
+        }
+    }*/
+
+
+
 
     public HootFragment() {
         // Required empty public constructor
@@ -114,14 +166,17 @@ public class HootFragment extends Fragment implements TextWatcher,
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        Long hootId = (Long) getActivity().getIntent().getSerializableExtra(EXTRA_HOOT_ID);
+        //String hootId = (String) getActivity().getIntent().getSerializableExtra(EXTRA_HOOT_ID);
 
         //listAdapter = new HootListAdapter(getActivity(), this, Base.hootList);
         //setListAdapter (listAdapter);
 
         app = HootApp.getApp();
         chronology = app.chronology;
-        hoot = chronology.getHoot(hootId);
+        //removed call to chronology and instead call from the hootService. This should create a new
+        //hoot on click, and allow user to edit. This may cause issues down the line when trying
+        //to edit hoots!!!
+        hoot = (Hoot) app.hootService.createHoot(hoot);
     }
 
     @Override
@@ -136,6 +191,8 @@ public class HootFragment extends Fragment implements TextWatcher,
         //addHoot.actionBar.setDisplayHomeAsUpEnabled(true);
 
         addListeners(view);
+       // This is looking for the hoots stored in hootService. It should be looking for one that is
+        // created, but the creating seems to have flaw stick with removing this for now.
         updateControls(hoot);
 
         return view;
@@ -155,6 +212,9 @@ public class HootFragment extends Fragment implements TextWatcher,
         date  .setOnClickListener(this);
         emailButton.setOnClickListener(this);
         contactButton.setOnClickListener(this);
+
+        //String currentDateTimeString = DateFormat.getDateTimeInstance().format("EEE, d MMM yyyy HH:mm:ss");
+        //date.setText(currentDateTimeString);
 
         hootContent.addTextChangedListener(new TextWatcher() {
 
@@ -186,7 +246,8 @@ public class HootFragment extends Fragment implements TextWatcher,
     }
 
     private void updateControls(Hoot hoot) {
-        hootContent.setText(hoot.hootContent);
+        hootContent.setText(hoot.hootmain);
+        //hootContent.setText(hoot.hootContent);
         date.setText(hoot.getFullDate());
 //        hashtag.setText(hoot.hashtag);
     }
@@ -247,7 +308,7 @@ public class HootFragment extends Fragment implements TextWatcher,
         } else {
             chronology.deleteHoot(hoot);
         }*/
-       chronology.saveHoots();
+       hootService.createHoot(hoot);
     }
 
     @Override
@@ -262,9 +323,17 @@ public class HootFragment extends Fragment implements TextWatcher,
                     break;
                 }
                         else if(hootContent.getText().length() > 0) {
-                hoot.hootContent = hootContent.getText().toString();
-                Toast.makeText(getActivity(), "Successful: " + hoot.hootContent, Toast.LENGTH_LONG).show();
+                String content = hootContent.getText().toString();
+                String thisDate = date.getText().toString();
+                String hashtag = "missing hashtag";
+
+                hoot.hootmain = hootContent.getText().toString();
+                Toast.makeText(getActivity(), "Successful: " + hoot.hootmain, Toast.LENGTH_LONG).show();
                     getActivity().finish();
+                    Hoot hoot = new Hoot(content, thisDate);// hashtag,
+                    Call<Hoot> call = (Call<Hoot>) app.hootService.createHoot(hoot);
+                    //Call<Hoot> call = (Call<Hoot>) app.hootService.createHoot(user._id, hoot);
+                    call.enqueue(this);
                     chronology.saveHoots();
                     break;
                 } else {
@@ -337,8 +406,8 @@ public class HootFragment extends Fragment implements TextWatcher,
 
     @Override
     public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
-        Date date = new GregorianCalendar(year, monthOfYear, dayOfMonth).getTime();
-        hoot.date = date.getTime();
+        String date = new GregorianCalendar(year, monthOfYear, dayOfMonth).getTime().toString();
+        hoot.date = date;
         hootButton.setText(hoot.getFullDate());
 
     }
@@ -357,6 +426,16 @@ public class HootFragment extends Fragment implements TextWatcher,
     public void afterTextChanged(Editable editable) {
         Log.i(this.getClass().getSimpleName(), "hoot content " + editable.toString());
         hoot.setHootContent(editable.toString());
+
+    }
+
+    @Override
+    public void onResponse(Call<Hoot> call, Response<Hoot> response) {
+
+    }
+
+    @Override
+    public void onFailure(Call<Hoot> call, Throwable t) {
 
     }
 

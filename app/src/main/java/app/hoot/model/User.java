@@ -13,11 +13,12 @@ import java.util.Random;
 
 //Core Reference: lab 4a S Drohan
 public class User {
+    public String _id;
     public String firstName;
     public String lastName;
     public String email;
     public String password;
-    public Long userId;
+    //public Long userId;
 
     private static final String JSON_USER_ID             = "userId"            ;
     private static final String JSON_FIRST_NAME             = "firstName"            ;
@@ -30,7 +31,7 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        userId = unsignedLong();
+        //userId = unsignedLong();
     }
 
     private Long unsignedLong() {
@@ -43,7 +44,7 @@ public class User {
     }
 
     public User(JSONObject json) throws JSONException{
-        userId = json.getLong(JSON_USER_ID);
+        //userId = json.getLong(JSON_USER_ID);
         firstName = json.getString(JSON_FIRST_NAME);
         lastName = json.getString(JSON_LAST_NAME);
         email = json.getString(JSON_EMAIL);
@@ -52,7 +53,7 @@ public class User {
 
     public JSONObject toJSON() throws JSONException{
         JSONObject json = new JSONObject();
-        json.put(JSON_USER_ID, Long.toString(userId));
+        //json.put(JSON_USER_ID, Long.toString(userId));
         json.put(JSON_FIRST_NAME, firstName);
         json.put(JSON_LAST_NAME, lastName);
         json.put(JSON_EMAIL, email);

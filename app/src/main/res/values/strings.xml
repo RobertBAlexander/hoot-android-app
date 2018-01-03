@@ -96,5 +96,7 @@
     <string name="nmr_hoots_summary">How many Hoots to store locally?</string>
     <string name="set_refresh_interval">Refresh</string>
     <string name="set_refresh_interval_summary">Frequency of cloud updates (minutes)</string>
+    <string name="hootWords">hootWords</string>
+    <string name="hootmain">hootmain</string>
 
 </resources>
