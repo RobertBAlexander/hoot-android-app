@@ -50,6 +50,7 @@ public class Welcome extends AppCompatActivity implements View.OnClickListener, 
         Call<List<User>> call1 = (Call<List<User>>) app.hootService.getAllUsers();
         call1.enqueue(this);
 
+
     }
 
     @Override

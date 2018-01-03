@@ -111,18 +111,22 @@ public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>>
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_item_new_hoot:
-                startActivity(new Intent(this, HootOut.class));
+            case R.id.settings:
+                startActivity(new Intent(this, SettingsActivity.class));
 
                 return true;
-            case R.id.menuSettings:
-                startActivity(new Intent(this, SettingsActivity.class));
+            case R.id.clear:
+                startActivity(new Intent(this, Timeline.class));
+                Toast toast = Toast.makeText(this, "Unable to delete all hoots, please delete them individually", Toast.LENGTH_LONG);
+                toast.show();
                 return true;
-            case R.id.menuLogout:
-                startActivity(new Intent(this, Welcome.class));
+            case R.id.usertimeline:
+                startActivity(new Intent(this, UsersTimeline.class));
                 break;
-            case android.R.id.home:
-                navigateUp(this);
+            case R.id.logout:
+                Intent in = new Intent(this, Welcome.class);
+                in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivityForResult(in, 0);
                 return true;
         }
         return super.onOptionsItemSelected(item);
