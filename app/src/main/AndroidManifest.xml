@@ -32,11 +32,11 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.HootOut"
-            android:label="HootOut"
+            android:label="Create Hoot"
             android:screenOrientation="portrait">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
-            android:value=".activity.ChronologyActivity" />
+            android:value=".activity.Timeline" />
     </activity>
         <!--<activity
             android:name=".activity.Home"
@@ -64,17 +64,21 @@
     </activity>
         <activity
             android:name=".activity.ChronologyActivity"
-            android:label="TimeLine"
+            android:label="Timeline"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.Timeline"
-            android:label="TimeLine"
+            android:label="Global Hoot Timeline"
             android:screenOrientation="portrait" />
 
         <activity
             android:name=".activity.UsersTimeline"
-            android:label="UsersTimeLine"
-            android:screenOrientation="portrait" />
+            android:label="Users Timeline"
+            android:screenOrientation="portrait" >
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".activity.Timeline" />
+        </activity>
         <activity
             android:name=".settings.SettingsActivity"
             android:label="@string/settings"
@@ -82,7 +86,13 @@
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.ChronologyActivity" />
+                android:value=".activity.Timeline" />
+        </activity>
+        <activity
+            android:name=".activity.Home"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan|adjustResize">
         </activity>
 
     </application>

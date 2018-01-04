@@ -49,7 +49,7 @@ import retrofit2.Response;
 import android.support.design.widget.NavigationView;
 import static app.hoot.helpers.IntentHelper.navigateUp;
 
-public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>>, NavigationView.OnNavigationItemSelectedListener {
+public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>> {
     private ListView listView;
     private HootApp app;
     private HootAdapter adapter;
@@ -104,7 +104,7 @@ public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>>
             }
         });
 
-/*        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+/*        Toolbar toolbar = (Toolbar) findViewById(R.id.nav_toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -139,13 +139,17 @@ public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>>
 
             case R.id.settings:
                 startActivity(new Intent(this, SettingsActivity.class));
-
                 return true;
+
             case R.id.clear:
                 startActivity(new Intent(this, Timeline.class));
                 Toast toast = Toast.makeText(this, "Unable to delete all hoots, please delete them individually", Toast.LENGTH_LONG);
                 toast.show();
                 return true;
+            case R.id.hoottimeline:
+                startActivity(new Intent(this, Timeline.class));
+                Toast.makeText(this, "You have successfully refreshed the Hoot Timeline", Toast.LENGTH_SHORT).show();
+                break;
             case R.id.usertimeline:
                 startActivity(new Intent(this, UsersTimeline.class));
                 break;
@@ -153,6 +157,11 @@ public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>>
                 Intent in = new Intent(this, Welcome.class);
                 in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivityForResult(in, 0);
+                return true;
+            case android.R.id.home:
+                Intent out = new Intent(this, Welcome.class);
+                out.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivityForResult(out, 0);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -170,10 +179,10 @@ public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>>
         toast.show();
     }
 
-    @Override
+/*    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         return false;
-    }
+    }*/
 }
 
 class HootAdapter extends ArrayAdapter<Hoot> {

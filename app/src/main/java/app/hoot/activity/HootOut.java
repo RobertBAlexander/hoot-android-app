@@ -41,6 +41,7 @@ import static app.hoot.R.attr.title;
 import static app.hoot.helpers.ContactHelper.getContact;
 import static app.hoot.helpers.ContactHelper.getEmail;
 import static app.hoot.helpers.ContactHelper.sendEmail;
+import static app.hoot.helpers.IntentHelper.navigateUp;
 import static app.hoot.helpers.IntentHelper.selectContact;
 
 public class HootOut extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener,  Callback<Hoot> {
@@ -118,6 +119,9 @@ public class HootOut extends AppCompatActivity implements View.OnClickListener, 
                 return true;
             case R.id.menuLogout:   startActivity(new Intent(this, Welcome.class));
                 break;
+            case android.R.id.home:
+                navigateUp(this);
+                return true;
         }
         return true;
     }

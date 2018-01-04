@@ -5,6 +5,7 @@ package app.hoot.fragments;
  */
 import app.hoot.R;
 
+import android.app.Activity;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.annotation.SuppressLint;
@@ -27,6 +28,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import app.hoot.activity.AddHoot;
 import app.hoot.activity.ChronologyActivity;
@@ -39,8 +42,10 @@ import app.hoot.model.Chronology;
 import app.hoot.model.Hoot;
 import app.hoot.settings.SettingsActivity;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class ChronologyFragment extends ListFragment implements AdapterView.OnItemClickListener, AbsListView.MultiChoiceModeListener {
+public class ChronologyFragment extends ListFragment implements OnItemClickListener, AbsListView.MultiChoiceModeListener, Callback<List<Hoot>> {
     private ArrayList<Hoot> hoots;
     private Chronology chronology;
     private HootAdapter adapter;
@@ -54,6 +59,9 @@ public class ChronologyFragment extends ListFragment implements AdapterView.OnIt
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         getActivity().setTitle(R.string.app_name);
+
+        Call<List<Hoot>> call = (Call<List<Hoot>>) app.hootService.getAllHoots();
+        call.enqueue(this);
 
         app = HootApp.getApp();
         chronology = app.chronology;
@@ -200,7 +208,35 @@ public class ChronologyFragment extends ListFragment implements AdapterView.OnIt
     public void onItemCheckedStateChanged(ActionMode actionMode, int position, long id, boolean checked) {
     }
 
-//Reference: lab 3b S Drohan
+    @Override
+    public void onResponse(Call<List<Hoot>> call, Response<List<Hoot>> response) {
+        //List<Hoot> array = new ArrayList<>();
+        //for(Hoot t : response.body()){
+
+
+
+            Intent intent = new Intent();
+                            //intent.putExtra(CameraActivity.EXTRA_PHOTO_FILENAME, t.path);
+            getActivity().setResult(Activity.RESULT_OK, intent);
+
+
+
+        //}
+        //Collections.sort(array, new Compare());
+        //hoots.refreshHoots(array);
+        adapter.notifyDataSetChanged();
+        app.hootServiceAvailable = true;
+    }
+
+    @Override
+    public void onFailure(Call<List<Hoot>> call, Throwable t) {
+        Toast toast = Toast.makeText(getActivity(), "Connection error, unable to retrieve hoots", Toast.LENGTH_SHORT);
+        toast.show();
+        app.hootServiceAvailable = false;
+    }
+
+
+    //Reference: lab 3b S Drohan
     class HootAdapter extends ArrayAdapter<Hoot> {
         private Context context;
 

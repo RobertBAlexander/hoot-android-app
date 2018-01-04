@@ -37,6 +37,7 @@ import java.util.List;
 import app.hoot.R;
 import app.hoot.main.HootService;
 import app.hoot.main.HootApp;
+import app.hoot.model.Hoot;
 import app.hoot.model.User;
 import app.hoot.settings.SettingsActivity;
 import retrofit2.Call;
@@ -113,18 +114,40 @@ public class UsersTimeline extends AppCompatActivity  implements Callback<List<U
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_item_new_hoot:
-                startActivity(new Intent(this, HootOut.class));
 
-                return true;
-            case R.id.menuSettings:
-                startActivity(new Intent(this, SettingsActivity.class));
-                return true;
-            case R.id.menuLogout:
-                startActivity(new Intent(this, Welcome.class));
-                break;
             case android.R.id.home:
                 navigateUp(this);
+                return true;
+
+            case R.id.menu_item_new_hoot:
+                //Toast.makeText(getActivity(), "Button pressed", Toast.LENGTH_SHORT).show();
+                //TODO: Remove dependancies on hoots and ids, and instead just link straight to
+                //creation of a hoot. Comment out rest of this button, and see how I get on.
+                Call<Hoot> hoot = app.hootService.createHoot(new Hoot("Hello",  "date"));//"hashtag",
+
+                startActivity(new Intent(this, HootOut.class));
+                return true;
+
+            case R.id.settings:
+                startActivity(new Intent(this, SettingsActivity.class));
+                return true;
+
+            case R.id.clear:
+                startActivity(new Intent(this, UsersTimeline.class));
+                Toast toast = Toast.makeText(this, "You don not have permission to delete users", Toast.LENGTH_LONG);
+                toast.show();
+                return true;
+            case R.id.hoottimeline:
+                startActivity(new Intent(this, Timeline.class));
+                break;
+            case R.id.usertimeline:
+                startActivity(new Intent(this, UsersTimeline.class));
+                Toast.makeText(this, "You have successfully refreshed the User Timeline", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.logout:
+                Intent in = new Intent(this, Welcome.class);
+                in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivityForResult(in, 0);
                 return true;
         }
         return super.onOptionsItemSelected(item);

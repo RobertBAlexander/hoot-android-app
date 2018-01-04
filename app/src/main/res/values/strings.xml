@@ -9,6 +9,10 @@
     <string name="welcomeLogin">Login</string>
     <string name="welcomeSignup">Sign up</string>
 
+    //Navigation
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
     //Add Hoot page
     <string name="submitHoot">Toot that Hoot</string>
     <string name="hoot_button">Toot that Hoot</string>
@@ -100,5 +104,6 @@
     <string name="hootmain">Enter text here</string>
     <string name="followButton">follow</string>
     <string name="userstimeline">Users</string>
+    <string name="hoottimeline">All Hoots</string>
 
 </resources>

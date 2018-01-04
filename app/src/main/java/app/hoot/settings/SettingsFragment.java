@@ -12,13 +12,20 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import app.hoot.R;
+import app.hoot.activity.HootOut;
+import app.hoot.activity.Timeline;
+import app.hoot.activity.UsersTimeline;
 import app.hoot.activity.Welcome;
+import app.hoot.main.HootApp;
+import app.hoot.model.Hoot;
+import retrofit2.Call;
 
 import static app.hoot.helpers.IntentHelper.navigateUp;
 import static app.hoot.helpers.LogHelpers.info;
 
 public class SettingsFragment  extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener  {
     private SharedPreferences prefs;
+    private HootApp app;
 
     @Override
     public void onCreate(Bundle savedInstanceState)  {
@@ -59,8 +66,31 @@ public class SettingsFragment  extends PreferenceFragment implements SharedPrefe
                 navigateUp(getActivity());
                 return true;
 
+            case R.id.menu_item_new_hoot:
+                //Toast.makeText(getActivity(), "Button pressed", Toast.LENGTH_SHORT).show();
+                //TODO: Remove dependancies on hoots and ids, and instead just link straight to
+                //creation of a hoot. Comment out rest of this button, and see how I get on.
+                Call<Hoot> hoot = app.hootService.createHoot(new Hoot("Hello",  "date"));//"hashtag",
+
+                startActivity(new Intent(getActivity(), HootOut.class));
+                return true;
+
             case R.id.settings:
                 Toast.makeText(getActivity(), "You are already in settings, you silly billy", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.clear:
+                startActivity(new Intent(getActivity(), SettingsActivity.class));
+                Toast toast = Toast.makeText(getActivity(), "No items available to clear from settingss.", Toast.LENGTH_LONG);
+                toast.show();
+                return true;
+
+            case R.id.hoottimeline:
+                startActivity(new Intent(getActivity(), Timeline.class));
+                return true;
+
+            case R.id.usertimeline:
+                startActivity(new Intent(getActivity(), UsersTimeline.class));
                 return true;
 
             case R.id.logout:

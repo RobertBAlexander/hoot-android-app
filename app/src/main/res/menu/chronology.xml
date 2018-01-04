@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="org.wit.mytweet.TweetActivity" >
+    tools:context="app.hoot.activity.Timeline" >
 
     <item android:id="@+id/menu_item_new_hoot"
         android:icon="@drawable/hoot_owl"
@@ -24,6 +24,11 @@
                 android:id="@+id/clear"
                 android:orderInCategory="100"
                 android:title="@string/clear" />
+
+            <item
+                android:id="@+id/hoottimeline"
+                android:orderInCategory="100"
+                android:title="@string/hoottimeline" />
 
             <item
                 android:id="@+id/usertimeline"
