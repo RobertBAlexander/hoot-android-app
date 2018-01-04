@@ -103,6 +103,7 @@ public class HootOut extends AppCompatActivity implements View.OnClickListener, 
             Call<Hoot> call = (Call<Hoot>)app.hootService.createHoot(hoot);
             call.enqueue(this);
             Log.v("Hoot", "Hoot Pressed!");
+            startActivity(new Intent(this, Timeline.class));
         }
         hootmain.setText("");
     }

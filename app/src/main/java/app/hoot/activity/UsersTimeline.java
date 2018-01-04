@@ -36,7 +36,6 @@ import java.util.List;
 
 import app.hoot.R;
 import app.hoot.main.HootService;
-import app.hoot.model.Hoot;
 import app.hoot.main.HootApp;
 import app.hoot.model.User;
 import app.hoot.settings.SettingsActivity;
@@ -45,6 +44,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static app.hoot.helpers.IntentHelper.navigateUp;
+import static app.hoot.helpers.LogHelpers.info;
 
 public class UsersTimeline extends AppCompatActivity  implements Callback<List<User>> {
     private ListView listView;
@@ -130,6 +130,28 @@ public class UsersTimeline extends AppCompatActivity  implements Callback<List<U
         return super.onOptionsItemSelected(item);
     }
 
+/*    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            *//*case R.id.userButton:
+                info(this, "Login Pressed");
+                startActivity(new Intent(this, Login.class));
+                break;*//*
+
+
+            case R.id.followButton:
+                if (app.currentUser.following != null) {
+                    String id = app.currentUser._id;
+                    Call<User> cal1 = (Call<User>) app.hootService.getUser(id);
+                    cal1.enqueue(this);
+                    info(this, "Signup Pressed");
+                    startActivity(new Intent(this, Signup.class));
+                    break;
+                } else {
+                }
+        }
+    }*/
+
     @Override
     public void onResponse(Call<List<User>> call, Response<List<User>> response) {
         adapter.users = response.body();
@@ -145,6 +167,7 @@ public class UsersTimeline extends AppCompatActivity  implements Callback<List<U
 
 class UserAdapter extends ArrayAdapter<User> {
     private Context context;
+    private HootApp app;
     public List<User> users = new ArrayList<User>();
 
     public UserAdapter(Context context, List<User> users) {
@@ -162,7 +185,16 @@ class UserAdapter extends ArrayAdapter<User> {
 
         TextView fullUserName = (TextView) view.findViewById(R.id.fullUserName);
         fullUserName.setText(user.firstName + " " + user.lastName);
-        //fullUserName.setText("blank user");
+
+        TextView button = (TextView) view.findViewById(R.id.followButton);
+        if(app.currentUser.following != null) {
+            if (app.currentUser.following.contains(user._id)) {
+                button.setText("Unfollow");
+            } else {
+                button.setText("Follow");
+            }
+        }
+
         return view;
     }
 

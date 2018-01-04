@@ -8,8 +8,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -42,9 +46,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.support.design.widget.NavigationView;
 import static app.hoot.helpers.IntentHelper.navigateUp;
 
-public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>> {
+public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>>, NavigationView.OnNavigationItemSelectedListener {
     private ListView listView;
     private HootApp app;
     private HootAdapter adapter;
@@ -98,6 +103,18 @@ public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>>
                 return true;
             }
         });
+
+/*        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);*/
     }
 
     @Override
@@ -111,6 +128,15 @@ public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>>
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.menu_item_new_hoot:
+                //Toast.makeText(getActivity(), "Button pressed", Toast.LENGTH_SHORT).show();
+                //TODO: Remove dependancies on hoots and ids, and instead just link straight to
+                //creation of a hoot. Comment out rest of this button, and see how I get on.
+                Call<Hoot> hoot = app.hootService.createHoot(new Hoot("Hello",  "date"));//"hashtag",
+
+                startActivity(new Intent(this, HootOut.class));
+                return true;
+
             case R.id.settings:
                 startActivity(new Intent(this, SettingsActivity.class));
 
@@ -142,6 +168,11 @@ public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>>
     public void onFailure(Call<List<Hoot>> call, Throwable t) {
         Toast toast = Toast.makeText(this, "Error retrieving hoots", Toast.LENGTH_LONG);
         toast.show();
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
     }
 }
 

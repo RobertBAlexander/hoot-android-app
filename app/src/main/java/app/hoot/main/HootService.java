@@ -37,4 +37,10 @@ public interface HootService {
 
     @POST("/api/hoots")
     Call<Hoot> createHoot(@Body Hoot hoot);
+
+    @POST("/api/followuser/{id}")
+    Call<User> followUser(@Path("id") String id);
+
+    @POST("/api/unfollowuser/{id}")
+    Call<User> unfollowUser(@Path("id") String id);
 }

@@ -8,6 +8,7 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.Random;
 
@@ -18,6 +19,10 @@ public class User {
     public String lastName;
     public String email;
     public String password;
+    public List<String> following;
+    public List<String> followers;
+    public boolean isFollowed;
+
     //public Long userId;
 
     private static final String JSON_USER_ID             = "userId"            ;
