@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,14 +47,15 @@ import retrofit2.Response;
 
 import static app.hoot.helpers.IntentHelper.navigateUp;
 import static app.hoot.helpers.LogHelpers.info;
+import static app.hoot.main.HootApp.currentUser;
 
-public class UsersTimeline extends AppCompatActivity  implements Callback<List<User>> {
+public class UsersTimeline extends AppCompatActivity  implements Callback<List<User>>, AdapterView.OnItemClickListener {
     private ListView listView;
     private HootApp app;
     private UserAdapter adapter;
+    private Button followButton;
     private String selectedItem;
-    private List<User> holder = new ArrayList<User>();
-    private final Context context = this;
+    //private final Context context = this;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,10 @@ public class UsersTimeline extends AppCompatActivity  implements Callback<List<U
         listView = (ListView) findViewById(R.id.chronology);
         adapter = new UserAdapter(this, app.users);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(this);
+
+        Toast toast = Toast.makeText(UsersTimeline.this, "Current User " + currentUser.firstName, Toast.LENGTH_LONG);
+        toast.show();
 
         Call<List<User>> call1 = (Call<List<User>>) app.hootService.getAllUsers();
         call1.enqueue(this);
@@ -153,6 +159,63 @@ public class UsersTimeline extends AppCompatActivity  implements Callback<List<U
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+        adapter.users = response.body();
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onFailure(Call<List<User>> call, Throwable t) {
+        Toast toast = Toast.makeText(this, "Error retrieving users", Toast.LENGTH_LONG);
+        toast.show();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+        final User user = adapter.getItem(position);
+        String userId = user._id;
+        Toast toast = Toast.makeText(UsersTimeline.this, "At least the button works", Toast.LENGTH_LONG);
+        toast.show();
+        if(app.currentUser.following != null) {
+            if(app.currentUser.following.contains(userId)) {
+                Call<User> call1 = (Call<User>) app.hootService.unfollow(app.currentUser._id, userId);
+                call1.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        Toast toast = Toast.makeText(UsersTimeline.this, "Unfollowed " + user.firstName + " " + user.lastName, Toast.LENGTH_LONG);
+                        toast.show();
+                        app.currentUser = response.body();
+                        startActivity(new Intent(UsersTimeline.this, Timeline.class));
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                        Toast toast = Toast.makeText(UsersTimeline.this, "Unable to unfollow " + user.firstName + " " + user.lastName, Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                });
+            } else if (!app.currentUser.following.contains(userId)) {
+                Call<User> call1 = (Call<User>) app.hootService.follow(app.currentUser._id, userId);
+                call1.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        Toast toast = Toast.makeText(UsersTimeline.this, "Started following " + user.firstName + " " + user.lastName, Toast.LENGTH_LONG);
+                        toast.show();
+                        app.currentUser = response.body();
+                        startActivity(new Intent(UsersTimeline.this, Timeline.class));
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                        Toast toast = Toast.makeText(UsersTimeline.this, "Unable to follow " + user.firstName + " " + user.lastName, Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                });
+            }
+        }
+    }
+
 /*    @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -175,7 +238,7 @@ public class UsersTimeline extends AppCompatActivity  implements Callback<List<U
         }
     }*/
 
-    @Override
+/*    @Override
     public void onResponse(Call<List<User>> call, Response<List<User>> response) {
         adapter.users = response.body();
         adapter.notifyDataSetChanged();
@@ -185,7 +248,7 @@ public class UsersTimeline extends AppCompatActivity  implements Callback<List<U
     public void onFailure(Call<List<User>> call, Throwable t) {
         Toast toast = Toast.makeText(this, "Error retrieving users", Toast.LENGTH_LONG);
         toast.show();
-    }
+    }*/
 }
 
 class UserAdapter extends ArrayAdapter<User> {
@@ -216,7 +279,9 @@ class UserAdapter extends ArrayAdapter<User> {
             } else {
                 button.setText("Follow");
             }
-        }
+        } //else {
+        //    button.setText("Follow");
+        //}
 
         return view;
     }

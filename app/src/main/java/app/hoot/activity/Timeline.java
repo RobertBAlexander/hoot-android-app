@@ -48,13 +48,14 @@ import retrofit2.Response;
 
 import android.support.design.widget.NavigationView;
 import static app.hoot.helpers.IntentHelper.navigateUp;
+import static app.hoot.main.HootApp.currentUser;
 
 public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>> {
     private ListView listView;
     private HootApp app;
     private HootAdapter adapter;
     private String selectedItem;
-    private List<Hoot> holder = new ArrayList<Hoot>();
+    //private List<Hoot> holder = new ArrayList<Hoot>();
     private final Context context = this;
 
     @Override
@@ -64,6 +65,9 @@ public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>>
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         app = (HootApp) getApplication();
+
+        Toast toast = Toast.makeText(Timeline.this, "Current User " + currentUser.firstName, Toast.LENGTH_LONG);
+        toast.show();
 
         listView = (ListView) findViewById(R.id.chronology);
         adapter = new HootAdapter(this, app.hoots);

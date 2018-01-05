@@ -49,6 +49,8 @@ public class Welcome extends AppCompatActivity implements View.OnClickListener, 
         app.currentUser = null;
         Call<List<User>> call1 = (Call<List<User>>) app.hootService.getAllUsers();
         call1.enqueue(this);
+/*        Toast toast = Toast.makeText(Welcome.this, "At least the button works" + app.hootService.getAllUsers(), Toast.LENGTH_LONG);
+        toast.show();*/
 
 
     }

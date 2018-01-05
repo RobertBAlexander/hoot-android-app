@@ -30,7 +30,8 @@ public class HootApp extends Application {
     //public List<Hoot> hootList = new ArrayList<Hoot>();
     public HootService hootService;
     public boolean         hootServiceAvailable = false;
-    public String          service_url  = "https://hoothoot-web-app.herokuapp.com/";   // Standard Emulator IP Address
+    public String          service_url  = "https://hoothoot-web.herokuapp.com/";   // Standard Emulator IP Address
+    //public String          service_url  = "https://twitter-web.herokuapp.com/";   // Standard Emulator IP Address
 
     public static User             currentUser;
     public List <Hoot>  hoots    = new ArrayList<Hoot>();
@@ -47,7 +48,7 @@ public class HootApp extends Application {
     {
         super.onCreate();
         Gson gson = new GsonBuilder().create();
-        app = this;
+        //app = this;
         ChronologySerializer serializer = new ChronologySerializer(this, FILENAMEU, FILENAMEH);
         chronology = new Chronology(serializer);
         Retrofit retrofit = new Retrofit.Builder()
@@ -55,6 +56,7 @@ public class HootApp extends Application {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         hootService = retrofit.create(HootService.class);
+
 
         Log.v("Hoot", "Hoot App Started");
     }
