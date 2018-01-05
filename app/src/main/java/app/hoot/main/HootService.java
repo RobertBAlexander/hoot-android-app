@@ -22,6 +22,9 @@ public interface HootService {
     @GET("/api/users/{id}")
     Call<User> getUser(@Path("id") String id);
 
+    @POST("/api/users/authenticate")
+    Call<User> authenticate(@Body User user);
+
     @POST("/api/users")
     Call<User> createUser(@Body User User);
 
