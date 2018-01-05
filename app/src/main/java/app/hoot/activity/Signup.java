@@ -19,9 +19,9 @@ import retrofit2.Response;
 
 public class Signup extends AppCompatActivity implements Callback<User> {
     //private Button signupRegisterButton;
-    private Chronology chronology;
+    //private Chronology chronology;
     public HootApp app;
-    private User user;
+    //private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +30,8 @@ public class Signup extends AppCompatActivity implements Callback<User> {
 
         //Long userId = (Long) (53453458L);
         //Long userId = (Long) getActivity().getIntent().getSerializableExtra(EXTRA_USER_ID);
-        app = HootApp.getApp();
-        chronology = app.chronology;
+        app = (HootApp) getApplication();
+        //chronology = app.chronology;
         //Removed as may not be needed for future retrieval of user
         //user = chronology.getUser();
 
@@ -46,8 +46,6 @@ public class Signup extends AppCompatActivity implements Callback<User> {
         String password  = ((TextView)  findViewById(R.id.signupPassword)).getText().toString();
         //Long userId = (294274287L);
 
-        HootApp app = (HootApp) getApplication();
-
         if(email.isEmpty())
         {
             Toast.makeText(this, "You must provide a valid e-mail!", Toast.LENGTH_SHORT).show();
@@ -58,21 +56,22 @@ public class Signup extends AppCompatActivity implements Callback<User> {
         }
         else {
             User user = new User(firstName, lastName, email, password);
-            app.addUser(user);
+            //app.addUser(user);
+            HootApp app = (HootApp) getApplication();
             Call<User> call = (Call<User>) app.hootService.createUser(user);
             call.enqueue(this);
             //user.email = email.toString();
             //Toast.makeText(this, "Successful creation of: " + user.email, Toast.LENGTH_LONG).show();
-            chronology.saveUsers();
-            startActivity(new Intent(this, Welcome.class));
+            //chronology.saveUsers();
+            //startActivity(new Intent(this, Welcome.class));
         }
     }
 
-    @Override
+/*    @Override
     protected void onPause() {
         super.onPause();
         app.chronology.saveUsers();
-    }
+    }*/
 
     @Override
     public void onResponse(Call<User> call, Response<User> response) {
