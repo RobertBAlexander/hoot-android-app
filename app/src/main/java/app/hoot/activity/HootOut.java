@@ -87,6 +87,7 @@ public class HootOut extends AppCompatActivity implements View.OnClickListener, 
             }
             @Override
             public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                //Reference for colour change. Sadly it didn't work: https://stackoverflow.com/questions/16430656/change-text-color-based-based-on-value-of-text
                 countdown.setText(String.valueOf(140 - (hootmain.getText().toString().length())));
                 //int countcolour = Integer.parseInt(countdown.toString());
                 if ((140 - hootmain.getText().toString().length()) >= 1) {

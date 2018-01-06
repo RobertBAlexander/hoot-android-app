@@ -16,6 +16,7 @@ import java.util.Map;
 import app.hoot.R;
 import app.hoot.activity.FollowTimeline;
 import app.hoot.activity.HootOut;
+import app.hoot.activity.PersonalTimeline;
 import app.hoot.activity.Timeline;
 import app.hoot.activity.UsersTimeline;
 import app.hoot.activity.Welcome;
@@ -67,6 +68,10 @@ public class SettingsFragment  extends PreferenceFragment implements SharedPrefe
         {
             case android.R.id.home:
                 navigateUp(getActivity());
+                return true;
+
+            case R.id.menu_item_personal:
+                startActivity(new Intent(getActivity(), PersonalTimeline.class));
                 return true;
 
             case R.id.menu_item_new_hoot:

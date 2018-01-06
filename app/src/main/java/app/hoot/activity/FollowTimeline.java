@@ -104,6 +104,10 @@ public class FollowTimeline extends AppCompatActivity  implements Callback<List<
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.menu_item_personal:
+                startActivity(new Intent(this, PersonalTimeline.class));
+                break;
+
             case R.id.menu_item_new_hoot:
                 //Toast.makeText(getActivity(), "Button pressed", Toast.LENGTH_SHORT).show();
                 //TODO: Remove dependancies on hoots and ids, and instead just link straight to

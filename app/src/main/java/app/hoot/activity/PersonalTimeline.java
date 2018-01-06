@@ -1,7 +1,7 @@
 package app.hoot.activity;
 
 /**
- * Created by Robert Alexander on 02/01/2018.
+ * Created by Robert Alexander on 06/01/2018.
  */
 
 import android.content.Context;
@@ -50,7 +50,7 @@ import android.support.design.widget.NavigationView;
 import static app.hoot.helpers.IntentHelper.navigateUp;
 import static app.hoot.main.HootApp.currentUser;
 
-public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>> {
+public class PersonalTimeline extends AppCompatActivity  implements Callback<List<Hoot>> {
     private ListView listView;
     private HootApp app;
     private HootAdapter adapter;
@@ -72,9 +72,12 @@ public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>>
         listView = (ListView) findViewById(R.id.chronology);
         adapter = new HootAdapter(this, app.hoots);
         listView.setAdapter(adapter);
+/*        Toast.makeText(getApplicationContext(), "Current user is " + app.currentUser._id, Toast.LENGTH_SHORT).show();*/
 
-        Call<List<Hoot>> call = (Call<List<Hoot>>) app.hootService.getAllHoots();
+        Call<List<Hoot>> call = (Call<List<Hoot>>) app.hootService.getHootsOf(app.currentUser._id);
         call.enqueue(this);
+
+
 
 /*        Toolbar toolbar = (Toolbar) findViewById(R.id.nav_toolbar);
         setSupportActionBar(toolbar);
@@ -91,7 +94,7 @@ public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>>
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.chronology, menu);
+        getMenuInflater().inflate(R.menu.personal_chronology, menu);
         return true;
     }
 
@@ -102,8 +105,8 @@ public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>>
         switch (item.getItemId()) {
             case R.id.menu_item_personal:
                 startActivity(new Intent(this, PersonalTimeline.class));
+                Toast.makeText(this, "You have successfully refreshed the Personal Timeline", Toast.LENGTH_SHORT).show();
                 break;
-
             case R.id.menu_item_new_hoot:
                 //Toast.makeText(getActivity(), "Button pressed", Toast.LENGTH_SHORT).show();
                 //TODO: Remove dependancies on hoots and ids, and instead just link straight to
@@ -122,10 +125,9 @@ public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>>
                 return true;
             case R.id.hoottimeline:
                 startActivity(new Intent(this, Timeline.class));
-                Toast.makeText(this, "You have successfully refreshed the Hoot Timeline", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.followtimeline:
-                startActivity(new Intent(this, FollowTimeline.class));
+                startActivity(new Intent(this, UsersTimeline.class));
                 break;
             case R.id.usertimeline:
                 startActivity(new Intent(this, UsersTimeline.class));
@@ -136,9 +138,7 @@ public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>>
                 startActivityForResult(in, 0);
                 return true;
             case android.R.id.home:
-                Intent out = new Intent(this, Welcome.class);
-                out.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivityForResult(out, 0);
+                navigateUp(this);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -162,11 +162,11 @@ public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>>
     }*/
 }
 
-class HootAdapter extends ArrayAdapter<Hoot> {
+class PersonalTimelineAdapter extends ArrayAdapter<Hoot> {
     private Context context;
     public List<Hoot> hoots = new ArrayList<Hoot> ();
 
-    public HootAdapter(Context context, List<Hoot> hoots) {
+    public PersonalTimelineAdapter(Context context, List<Hoot> hoots) {
         super(context, R.layout.hootrow, hoots);
         this.context = context;
         this.hoots = hoots;
@@ -178,6 +178,7 @@ class HootAdapter extends ArrayAdapter<Hoot> {
 
         View view = inflater.inflate(R.layout.hootrow, parent, false);
         Hoot hoot = hoots.get(position);
+
 
         TextView hootView = (TextView) view.findViewById(R.id.chronology_item_hoot);
         TextView hootDate = (TextView) view.findViewById(R.id.chronology_item_dateTextView);

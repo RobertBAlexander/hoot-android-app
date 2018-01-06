@@ -42,6 +42,7 @@
     <string name="userstimeline">Users</string>
     <string name="hoottimeline">All Hoots</string>
     <string name="followtimeline">Follow Timeline</string>
+    <string name="personaltimeline">Personal Timeline</string>
 
     //Reports or timeline page
     <string name="reportTitle">Report</string>

@@ -38,6 +38,9 @@ public interface HootService {
     @GET("/api/users/{id}/followed")
     Call<List<Hoot>> getFollowedHoots(@Path("id") String id);
 
+    @GET("/api/users/{id}/hootsof")
+    Call<List<Hoot>> getHootsOf(@Path("id") String id);
+
 /*    @GET("/api/candidates")
     Call<List<Candidate>> getAllCandidates();*/
 
