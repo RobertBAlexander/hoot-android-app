@@ -73,42 +73,12 @@ public class FollowTimeline extends AppCompatActivity  implements Callback<List<
         listView = (ListView) findViewById(R.id.chronology);
         adapter = new HootAdapter(this, app.hoots);
         listView.setAdapter(adapter);
-        Toast.makeText(getApplicationContext(), "Current user is " + app.currentUser._id, Toast.LENGTH_SHORT).show();
+/*        Toast.makeText(getApplicationContext(), "Current user is " + app.currentUser._id, Toast.LENGTH_SHORT).show();*/
 
         Call<List<Hoot>> call = (Call<List<Hoot>>) app.hootService.getFollowedHoots(app.currentUser._id);
         call.enqueue(this);
 
-        // http://piyushovte.blogspot.ie/2011/03/listview-data-select-and-delete.html
-        listView.setOnItemLongClickListener (new AdapterView.OnItemLongClickListener() {
 
-            @Override
-            public boolean onItemLongClick(final AdapterView<?> adapterView, View view, final int i, long l) {
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setMessage("Do you want to delete this hoot?");
-                builder.setCancelable(false);
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-
-                    // Due to getting hoots from API issue here with deleting a hoot
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int j) {
-                        //adapter.remove(adapter.getItem(i));
-                        //Toast.makeText(getApplicationContext(), Integer.toString(i), Toast.LENGTH_SHORT).show();
-                        //adapter.notifyDataSetChanged();
-
-                        Toast.makeText(getApplicationContext(), "Unable to delete hoot at this time, sorry!", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.cancel();
-                    }
-                });
-                builder.show();
-                return true;
-            }
-        });
 
 /*        Toolbar toolbar = (Toolbar) findViewById(R.id.nav_toolbar);
         setSupportActionBar(toolbar);
@@ -152,7 +122,10 @@ public class FollowTimeline extends AppCompatActivity  implements Callback<List<
                 return true;
             case R.id.hoottimeline:
                 startActivity(new Intent(this, Timeline.class));
-                Toast.makeText(this, "You have successfully refreshed the Hoot Timeline", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.followtimeline:
+                startActivity(new Intent(this, UsersTimeline.class));
+                Toast.makeText(this, "You have successfully refreshed the Follow Timeline", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.usertimeline:
                 startActivity(new Intent(this, UsersTimeline.class));
@@ -163,9 +136,7 @@ public class FollowTimeline extends AppCompatActivity  implements Callback<List<
                 startActivityForResult(in, 0);
                 return true;
             case android.R.id.home:
-                Intent out = new Intent(this, Welcome.class);
-                out.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivityForResult(out, 0);
+                navigateUp(this);
                 return true;
         }
         return super.onOptionsItemSelected(item);

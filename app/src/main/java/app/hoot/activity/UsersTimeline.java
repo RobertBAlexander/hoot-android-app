@@ -118,6 +118,9 @@ public class UsersTimeline extends AppCompatActivity  implements Callback<List<U
             case R.id.map:
                 startActivity(new Intent(this, Map.class));
                 return true;
+            case R.id.followtimeline:
+                startActivity(new Intent(this, FollowTimeline.class));
+                break;
             case R.id.hoottimeline:
                 startActivity(new Intent(this, Timeline.class));
                 break;

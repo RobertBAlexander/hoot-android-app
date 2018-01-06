@@ -76,38 +76,6 @@ public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>>
         Call<List<Hoot>> call = (Call<List<Hoot>>) app.hootService.getAllHoots();
         call.enqueue(this);
 
-        // http://piyushovte.blogspot.ie/2011/03/listview-data-select-and-delete.html
-        listView.setOnItemLongClickListener (new AdapterView.OnItemLongClickListener() {
-
-            @Override
-            public boolean onItemLongClick(final AdapterView<?> adapterView, View view, final int i, long l) {
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setMessage("Do you want to delete this hoot?");
-                builder.setCancelable(false);
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-
-                    // Due to getting hoots from API issue here with deleting a hoot
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int j) {
-                        //adapter.remove(adapter.getItem(i));
-                        //Toast.makeText(getApplicationContext(), Integer.toString(i), Toast.LENGTH_SHORT).show();
-                        //adapter.notifyDataSetChanged();
-
-                        Toast.makeText(getApplicationContext(), "Unable to delete hoot at this time, sorry!", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.cancel();
-                    }
-                });
-                builder.show();
-                return true;
-            }
-        });
-
 /*        Toolbar toolbar = (Toolbar) findViewById(R.id.nav_toolbar);
         setSupportActionBar(toolbar);
 

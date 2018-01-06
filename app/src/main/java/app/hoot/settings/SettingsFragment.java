@@ -14,6 +14,7 @@ import android.widget.Toast;
 import java.util.Map;
 
 import app.hoot.R;
+import app.hoot.activity.FollowTimeline;
 import app.hoot.activity.HootOut;
 import app.hoot.activity.Timeline;
 import app.hoot.activity.UsersTimeline;
@@ -87,6 +88,10 @@ public class SettingsFragment  extends PreferenceFragment implements SharedPrefe
 
             case R.id.hoottimeline:
                 startActivity(new Intent(getActivity(), Timeline.class));
+                return true;
+
+            case R.id.followtimeline:
+                startActivity(new Intent(getActivity(), FollowTimeline.class));
                 return true;
 
             case R.id.usertimeline:
