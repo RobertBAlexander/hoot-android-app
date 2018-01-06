@@ -21,9 +21,9 @@
                 android:orderInCategory="100"
                 android:title="@string/settings" />
             <item
-                android:id="@+id/clear"
+                android:id="@+id/map"
                 android:orderInCategory="100"
-                android:title="@string/clear" />
+                android:title="@string/title_map" />
 
             <item
                 android:id="@+id/hoottimeline"

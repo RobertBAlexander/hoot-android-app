@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "304439191485",
+    "project_id": "myhoothootapp-1515240492849"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:304439191485:android:dacaae7740768195",
+        "android_client_info": {
+          "package_name": "app.hoot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "304439191485-t11g7pmu4iskp9hacq7keroteebtda47.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.hoot",
+            "certificate_hash": "ec799935c0a3b94070cf5e8f7eb614d23bc4daaa"
+          }
+        },
+        {
+          "client_id": "304439191485-c6tk9fju5rlaalcovjm62skvh1p8fcdh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgmR7CL78op_IVVHWYL1-nJoWq91DD86Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -70,8 +70,8 @@ public class UsersTimeline extends AppCompatActivity  implements Callback<List<U
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
 
-        Toast toast = Toast.makeText(UsersTimeline.this, "Current User " + currentUser.firstName, Toast.LENGTH_LONG);
-        toast.show();
+/*        Toast toast = Toast.makeText(UsersTimeline.this, "Current User " + currentUser.firstName, Toast.LENGTH_LONG);
+        toast.show();*/
 
         Call<List<User>> call1 = (Call<List<User>>) app.hootService.getAllUsers();
         call1.enqueue(this);
@@ -138,10 +138,8 @@ public class UsersTimeline extends AppCompatActivity  implements Callback<List<U
                 startActivity(new Intent(this, SettingsActivity.class));
                 return true;
 
-            case R.id.clear:
-                startActivity(new Intent(this, UsersTimeline.class));
-                Toast toast = Toast.makeText(this, "You don not have permission to delete users", Toast.LENGTH_LONG);
-                toast.show();
+            case R.id.map:
+                startActivity(new Intent(this, Map.class));
                 return true;
             case R.id.hoottimeline:
                 startActivity(new Intent(this, Timeline.class));

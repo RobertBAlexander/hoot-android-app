@@ -30,6 +30,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import app.hoot.activity.AddHoot;
 import app.hoot.activity.ChronologyActivity;
@@ -136,12 +137,12 @@ public class ChronologyFragment extends ListFragment implements OnItemClickListe
                 startActivity(new Intent(getActivity(), SettingsActivity.class));
                 return true;
 
-            case R.id.clear:
-                for (Hoot thisHoot: hoots) {
+            case R.id.map:
+/*                for (Hoot thisHoot: hoots) {
                     chronology.deleteHoot(thisHoot);
-                }
+                }*/
                 Toast.makeText(app.getApplicationContext(), "Unable to delete hoots at this time, why not multi select the tweets you wish to delete?", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getActivity(), ChronologyActivity.class));
+                startActivity(new Intent(getActivity(), Map.class));
                 return true;
 
             case R.id.logout:

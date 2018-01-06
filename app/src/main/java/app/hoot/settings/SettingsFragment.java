@@ -11,6 +11,8 @@ import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.Map;
+
 import app.hoot.R;
 import app.hoot.activity.HootOut;
 import app.hoot.activity.Timeline;
@@ -79,10 +81,8 @@ public class SettingsFragment  extends PreferenceFragment implements SharedPrefe
                 Toast.makeText(getActivity(), "You are already in settings, you silly billy", Toast.LENGTH_SHORT).show();
                 return true;
 
-            case R.id.clear:
-                startActivity(new Intent(getActivity(), SettingsActivity.class));
-                Toast toast = Toast.makeText(getActivity(), "No items available to clear from settingss.", Toast.LENGTH_LONG);
-                toast.show();
+            case R.id.map:
+                startActivity(new Intent(getActivity(), Map.class));
                 return true;
 
             case R.id.hoottimeline:

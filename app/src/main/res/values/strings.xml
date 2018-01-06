@@ -43,7 +43,7 @@
     //Reports or timeline page
     <string name="reportTitle">Report</string>
     <string name="delete_hoot">Delete Hoot</string>
-    <string name="date"/>
+    <string name="date" />
 
     //Signup page
     <string name="SignupTitle">Sign up to Hoot at People</string>
@@ -63,7 +63,11 @@
     <string name="appDesc">Hoot Hoot allows the user to create Hoots. These are similar to tweets, but you make them at night!</string>
     <string name="appMoreInfo">For more information about the Hoot Hoot app or to provide feedback please talk to me in person. I sit over in the corner near Brian and John.</string>
     <string name="hootContent">Hoot it Here!</string>
-    <string name="addHootDate"/>
+    <string name="addHootDate" />
+
+    //Map page and associated map strings
+    <string name="title_map">Map</string>
+    <string name="google_maps_key">AIzaSyC7ZAUy9QcX1v4Bw2tPpMIVw-6apJxrHyo</string>
 
     /other for now
     <string name="searchHootsLbl">Search Hoot\'s</string>

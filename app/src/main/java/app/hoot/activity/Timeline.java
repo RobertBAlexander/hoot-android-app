@@ -66,8 +66,8 @@ public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>>
 
         app = (HootApp) getApplication();
 
-        Toast toast = Toast.makeText(Timeline.this, "Current User " + currentUser.firstName, Toast.LENGTH_LONG);
-        toast.show();
+/*        Toast toast = Toast.makeText(Timeline.this, "Current User " + currentUser.firstName, Toast.LENGTH_LONG);
+        toast.show();*/
 
         listView = (ListView) findViewById(R.id.chronology);
         adapter = new HootAdapter(this, app.hoots);
@@ -145,10 +145,8 @@ public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>>
                 startActivity(new Intent(this, SettingsActivity.class));
                 return true;
 
-            case R.id.clear:
-                startActivity(new Intent(this, Timeline.class));
-                Toast toast = Toast.makeText(this, "Unable to delete all hoots, please delete them individually", Toast.LENGTH_LONG);
-                toast.show();
+            case R.id.map:
+                startActivity(new Intent(this, Map.class));
                 return true;
             case R.id.hoottimeline:
                 startActivity(new Intent(this, Timeline.class));
