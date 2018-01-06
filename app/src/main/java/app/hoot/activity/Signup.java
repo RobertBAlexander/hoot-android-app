@@ -45,15 +45,30 @@ public class Signup extends AppCompatActivity implements Callback<User> {
         String email     = ((TextView)  findViewById(R.id.signupEmail)).getText().toString();
         String password  = ((TextView)  findViewById(R.id.signupPassword)).getText().toString();
         //Long userId = (294274287L);
+        String lastNameValid = lastName.trim();
+        String lastNameAllowed = "[A-Z]{1,3}[']?[a-zA-Z]{3,14}[-]?[A-Z]{0,3}[']?[a-zA-Z]{0,14}";
 
         if(email.isEmpty())
         {
             Toast.makeText(this, "You must provide a valid e-mail!", Toast.LENGTH_SHORT).show();
         }
-        else if(password.isEmpty())
+        else if(password.length() < 6)
         {
-            Toast.makeText(this, "You must have a password!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "You must have a password of 6 characters or more!", Toast.LENGTH_SHORT).show();
         }
+        else if(firstName.isEmpty())
+        {
+            Toast.makeText(this, "You must provide a valid first name!", Toast.LENGTH_SHORT).show();
+        }
+        else if(lastName.isEmpty())
+        {
+            Toast.makeText(this, "You must provide a valid last name!", Toast.LENGTH_SHORT).show();
+        }
+        else if(!lastNameValid.matches(lastNameAllowed))
+        {
+            Toast.makeText(this, "You must provide a valid last name!", Toast.LENGTH_SHORT).show();
+        }
+
         else {
             User user = new User(firstName, lastName, email, password);
             //app.addUser(user);

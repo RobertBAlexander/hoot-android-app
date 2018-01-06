@@ -99,7 +99,11 @@ public class HootOut extends AppCompatActivity implements View.OnClickListener, 
             Toast toast = Toast.makeText(this, "Hoot must contain characters", Toast.LENGTH_SHORT);
             toast.show();
         }
-        if(!text.equals("")) {
+        else if(text.length() > 140){
+            Toast toast = Toast.makeText(this, "Hoot must be less than 140 characters", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        else {
             Hoot hoot = new Hoot(text, date);// hashtag
             Call<Hoot> call = (Call<Hoot>)app.hootService.createHoot(hoot);
             call.enqueue(this);
