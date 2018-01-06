@@ -7,6 +7,7 @@ package app.hoot.activity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -48,7 +49,6 @@ public class HootOut extends AppCompatActivity implements View.OnClickListener, 
     private static final int REQUEST_CONTACT = 1;
     private Button submitHoot;
     private EditText hootmain;
-    private TextView counter;
     private HootApp app;
     private TextView hootDate;
     //private TextView hashtag;
@@ -57,6 +57,7 @@ public class HootOut extends AppCompatActivity implements View.OnClickListener, 
     private String emailAddress = "";
     private String emailBody = "";
     private Hoot hoot;
+    private TextView countdown;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,9 +65,11 @@ public class HootOut extends AppCompatActivity implements View.OnClickListener, 
         app = (HootApp) getApplication();
         submitHoot = (Button) findViewById(R.id.submitHoot);
         hootmain = (EditText) findViewById(R.id.hootmain);
-        //counter = (TextView) findViewById(R.id.counter);
         hootDate = (TextView) findViewById(R.id.addHootDate);
         contactButton = (Button) findViewById(R.id.contactButton);
+        countdown = (TextView) findViewById(R.id.countdown);
+        countdown.setText(String.valueOf(140));
+
         emailButton = (Button) findViewById(R.id.emailButton);
         contactButton.setOnClickListener(this);
         emailButton.setOnClickListener(this);
@@ -80,11 +83,19 @@ public class HootOut extends AppCompatActivity implements View.OnClickListener, 
 
         hootmain.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {
             }
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                //counter.setText(String.valueOf(140 - (hootWords.getText().toString().length())));
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                countdown.setText(String.valueOf(140 - (hootmain.getText().toString().length())));
+                //int countcolour = Integer.parseInt(countdown.toString());
+                if ((140 - hootmain.getText().toString().length()) >= 1) {
+                    countdown.setTextColor(Color.BLUE);
+                } else if ((140 - hootmain.getText().toString().length()) == 0) {
+                    countdown.setTextColor(Color.YELLOW);
+                } else {
+                    countdown.setTextColor(Color.RED);
+                }
             }
             @Override
             public void afterTextChanged(Editable editable) {
@@ -110,7 +121,7 @@ public class HootOut extends AppCompatActivity implements View.OnClickListener, 
             Log.v("Hoot", "Hoot Pressed!");
             startActivity(new Intent(this, Timeline.class));
         }
-        hootmain.setText("");
+        //hootmain.setText("");
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
