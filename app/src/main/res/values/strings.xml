@@ -41,7 +41,7 @@
     <string name="logout">Logout</string>
     <string name="userstimeline">Users</string>
     <string name="hoottimeline">All Hoots</string>
-    <string name="followtimeline">Personal Timeline</string>
+    <string name="followtimeline">Follow Timeline</string>
 
     //Reports or timeline page
     <string name="reportTitle">Report</string>

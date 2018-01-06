@@ -80,7 +80,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.FollowTimeline"
-            android:label="Personal Timeline"
+            android:label="Follow Timeline"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -115,7 +115,11 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".activity.Map"></activity>
+        <activity android:name=".activity.Map">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.Timeline" />
+        </activity>
     </application>
 
 </manifest>
