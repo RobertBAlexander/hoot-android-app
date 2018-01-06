@@ -13,6 +13,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface HootService {
@@ -28,8 +29,14 @@ public interface HootService {
     @POST("/api/users")
     Call<User> createUser(@Body User User);
 
+    @PUT("/api/users")
+    Call<User> updateUser(@Body User user);
+
     @GET("/api/hoots")
     Call<List<Hoot>> getAllHoots();
+
+    @GET("/api/users/{id}/followed")
+    Call<List<Hoot>> getFollowedHoots(@Path("id") String id);
 
 /*    @GET("/api/candidates")
     Call<List<Candidate>> getAllCandidates();*/
@@ -52,4 +59,6 @@ public interface HootService {
 
     @POST("/api/users/{id}/unfollow")
     Call<User> unfollow(@Path("id") String _id, @Body String user);
+
+
 }

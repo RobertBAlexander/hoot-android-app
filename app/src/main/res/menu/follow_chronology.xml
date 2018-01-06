@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="app.hoot.activity.Timeline" >
+    tools:context="app.hoot.activity.FollowTimeline" >
 
     <item android:id="@+id/menu_item_new_hoot"
         android:icon="@drawable/hoot_owl"
@@ -29,11 +29,6 @@
                 android:id="@+id/hoottimeline"
                 android:orderInCategory="100"
                 android:title="@string/hoottimeline" />
-
-            <item
-                android:id="@+id/followtimeline"
-                android:orderInCategory="100"
-                android:title="@string/followtimeline" />
 
             <item
                 android:id="@+id/usertimeline"

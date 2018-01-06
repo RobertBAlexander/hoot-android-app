@@ -39,6 +39,9 @@
     <string name="settings">Settings</string>
     <string name="clear">Clear</string>
     <string name="logout">Logout</string>
+    <string name="userstimeline">Users</string>
+    <string name="hoottimeline">All Hoots</string>
+    <string name="followtimeline">Personal Timeline</string>
 
     //Reports or timeline page
     <string name="reportTitle">Report</string>
@@ -107,7 +110,6 @@
     <string name="hootWords">hootWords</string>
     <string name="hootmain">Enter text here</string>
     <string name="followButton">follow</string>
-    <string name="userstimeline">Users</string>
-    <string name="hoottimeline">All Hoots</string>
+
 
 </resources>

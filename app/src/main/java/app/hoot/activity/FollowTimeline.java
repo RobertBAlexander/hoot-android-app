@@ -1,8 +1,9 @@
 package app.hoot.activity;
 
 /**
- * Created by Robert Alexander on 02/01/2018.
+ * Created by Robert Alexander on 06/01/2018.
  */
+
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -50,7 +51,7 @@ import android.support.design.widget.NavigationView;
 import static app.hoot.helpers.IntentHelper.navigateUp;
 import static app.hoot.main.HootApp.currentUser;
 
-public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>> {
+public class FollowTimeline extends AppCompatActivity  implements Callback<List<Hoot>> {
     private ListView listView;
     private HootApp app;
     private HootAdapter adapter;
@@ -72,8 +73,9 @@ public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>>
         listView = (ListView) findViewById(R.id.chronology);
         adapter = new HootAdapter(this, app.hoots);
         listView.setAdapter(adapter);
+        Toast.makeText(getApplicationContext(), "Current user is " + app.currentUser._id, Toast.LENGTH_SHORT).show();
 
-        Call<List<Hoot>> call = (Call<List<Hoot>>) app.hootService.getAllHoots();
+        Call<List<Hoot>> call = (Call<List<Hoot>>) app.hootService.getFollowedHoots(app.currentUser._id);
         call.enqueue(this);
 
         // http://piyushovte.blogspot.ie/2011/03/listview-data-select-and-delete.html
@@ -123,7 +125,7 @@ public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>>
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.chronology, menu);
+        getMenuInflater().inflate(R.menu.follow_chronology, menu);
         return true;
     }
 
@@ -151,9 +153,6 @@ public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>>
             case R.id.hoottimeline:
                 startActivity(new Intent(this, Timeline.class));
                 Toast.makeText(this, "You have successfully refreshed the Hoot Timeline", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.followtimeline:
-                startActivity(new Intent(this, FollowTimeline.class));
                 break;
             case R.id.usertimeline:
                 startActivity(new Intent(this, UsersTimeline.class));
@@ -190,11 +189,11 @@ public class Timeline extends AppCompatActivity  implements Callback<List<Hoot>>
     }*/
 }
 
-class HootAdapter extends ArrayAdapter<Hoot> {
+class FollowTimelineAdapter extends ArrayAdapter<Hoot> {
     private Context context;
     public List<Hoot> hoots = new ArrayList<Hoot> ();
 
-    public HootAdapter(Context context, List<Hoot> hoots) {
+    public FollowTimelineAdapter(Context context, List<Hoot> hoots) {
         super(context, R.layout.hootrow, hoots);
         this.context = context;
         this.hoots = hoots;
@@ -206,6 +205,7 @@ class HootAdapter extends ArrayAdapter<Hoot> {
 
         View view = inflater.inflate(R.layout.hootrow, parent, false);
         Hoot hoot = hoots.get(position);
+
 
         TextView hootView = (TextView) view.findViewById(R.id.chronology_item_hoot);
         TextView hootDate = (TextView) view.findViewById(R.id.chronology_item_dateTextView);

@@ -75,38 +75,15 @@ public class UsersTimeline extends AppCompatActivity  implements Callback<List<U
 
         Call<List<User>> call1 = (Call<List<User>>) app.hootService.getAllUsers();
         call1.enqueue(this);
+    }
 
-       /* // http://piyushovte.blogspot.ie/2011/03/listview-data-select-and-delete.html
-        listView.setOnItemLongClickListener (new AdapterView.OnItemLongClickListener() {
-
-            @Override
-            public boolean onItemLongClick(final AdapterView<?> adapterView, View view, final int i, long l) {
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setMessage("Do you want to delete this hoot?");
-                builder.setCancelable(false);
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-
-                    // Due to getting hoots from API issue here with deleting a hoot
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int j) {
-                        //adapter.remove(adapter.getItem(i));
-                        //Toast.makeText(getApplicationContext(), Integer.toString(i), Toast.LENGTH_SHORT).show();
-                        //adapter.notifyDataSetChanged();
-
-                        Toast.makeText(getApplicationContext(), "Unable to delete hoot at this time, sorry!", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.cancel();
-                    }
-                });
-                builder.show();
-                return true;
-            }
-        });*/
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        Call<List<User>> call1 = (Call<List<User>>) app.hootService.getAllUsers();
+        call1.enqueue(this);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -272,10 +249,13 @@ class UserAdapter extends ArrayAdapter<User> {
 
         TextView button = (TextView) view.findViewById(R.id.followButton);
         if(app.currentUser.following != null) {
+            //https://stackoverflow.com/questions/2173936/how-to-set-background-color-of-a-view
             if (app.currentUser.following.contains(user._id)) {
                 button.setText("Unfollow");
+                button.setBackgroundColor(0xFFda0d0d);
             } else {
                 button.setText("Follow");
+                button.setBackgroundColor(0xFF4289F4);
             }
         } //else {
         //    button.setText("Follow");

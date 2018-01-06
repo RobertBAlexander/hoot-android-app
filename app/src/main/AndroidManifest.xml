@@ -79,6 +79,14 @@
             android:label="Global Hoot Timeline"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.FollowTimeline"
+            android:label="Personal Timeline"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.Timeline" />
+        </activity>
+        <activity
             android:name=".activity.UsersTimeline"
             android:label="Users Timeline"
             android:screenOrientation="portrait">
