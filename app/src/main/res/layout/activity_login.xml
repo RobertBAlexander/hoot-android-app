@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#0b3093"
     tools:context="app.hoot.activity.Login">
 
     <Button
@@ -25,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
+        android:textColor="#FFFFFF"
         android:ems="10"
         android:inputType="textPassword"
         android:hint="@string/loginPassword"
@@ -37,6 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="64dp"
+        android:textColor="#FFFFFF"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:hint="@string/loginEmail"
@@ -50,6 +53,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="64dp"
+        android:textColor="#FFFFFF"
         android:text="@string/hootLogin"
         android:onClick="loginButtonPressed"
         android:textAppearance="@android:style/TextAppearance.Large"

@@ -88,7 +88,8 @@ public class SettingsFragment  extends PreferenceFragment implements SharedPrefe
                 return true;
 
             case R.id.map:
-                startActivity(new Intent(getActivity(), Map.class));
+                //startActivity(new Intent(getActivity(), Map.class));
+                Toast.makeText(getActivity(), "You may not access maps from settings", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.hoottimeline:

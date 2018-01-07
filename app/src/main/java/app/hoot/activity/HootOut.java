@@ -91,7 +91,7 @@ public class HootOut extends AppCompatActivity implements View.OnClickListener, 
                 countdown.setText(String.valueOf(140 - (hootmain.getText().toString().length())));
                 //int countcolour = Integer.parseInt(countdown.toString());
                 if ((140 - hootmain.getText().toString().length()) >= 1) {
-                    countdown.setTextColor(Color.BLUE);
+                    countdown.setTextColor(Color.GREEN);
                 } else if ((140 - hootmain.getText().toString().length()) == 0) {
                     countdown.setTextColor(Color.YELLOW);
                 } else {

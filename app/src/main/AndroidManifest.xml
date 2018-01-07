@@ -123,7 +123,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".activity.Map">
+        <activity android:name=".activity.Map"
+            android:label="@string/title_map"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.Timeline" />
