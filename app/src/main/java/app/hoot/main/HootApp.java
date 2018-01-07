@@ -96,6 +96,7 @@ public class HootApp extends Application {
                 currentUser = user;
                 return true;
             }
+
         }
         return false;
     }

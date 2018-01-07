@@ -155,13 +155,29 @@ public class HootOut extends AppCompatActivity implements View.OnClickListener, 
     }
     public void onClick(View view)
     {
+        String text = hootmain.getText().toString();
         switch (view.getId())
         {
             case R.id.contactButton : selectContact(this, REQUEST_CONTACT);
+/*                if (hoot.contact != null) {
+                    contactButton.setText("Contact: " + hoot.contact);
+                }*/
                 break;
             case R.id.emailButton:
-                sendEmail(this, emailAddress,
-                        getString(R.string.email_subject), hootmain.getText().toString());
+                if(text.equals(""))
+                {
+                    Toast toast = Toast.makeText(this, "Unable to send an empty Hoot", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else if (text.length() > 140)
+                {
+                    Toast toast = Toast.makeText(this, "Unable to send an Hoot over 140 characters", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else {
+                    sendEmail(this, emailAddress,
+                            getString(R.string.email_subject), hootmain.getText().toString());
+                }
         }
     }
     @Override

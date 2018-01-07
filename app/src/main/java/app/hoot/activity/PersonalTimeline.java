@@ -55,7 +55,8 @@ public class PersonalTimeline extends AppCompatActivity  implements Callback<Lis
     private HootApp app;
     private HootAdapter adapter;
     private String selectedItem;
-    //private List<Hoot> holder = new ArrayList<Hoot>();
+    //private List<Hoot> myHoots = new ArrayList<Hoot>();
+    //private ArrayList<Hoot>
     private final Context context = this;
 
     @Override
@@ -76,6 +77,8 @@ public class PersonalTimeline extends AppCompatActivity  implements Callback<Lis
 
         Call<List<Hoot>> call = (Call<List<Hoot>>) app.hootService.getHootsOf(app.currentUser._id);
         call.enqueue(this);
+/*        ArrayList<Hoot> myHoots = new ArrayList<Hoot>(app.hoots.size());
+        myHoots.addAll(app.hoots);*/
 
 
 

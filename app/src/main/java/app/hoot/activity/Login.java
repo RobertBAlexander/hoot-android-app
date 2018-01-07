@@ -31,6 +31,17 @@ public class Login extends AppCompatActivity {
         TextView email     = (TextView)  findViewById(R.id.loginEmail);
         TextView password  = (TextView)  findViewById(R.id.loginPassword);
 
+        String userEmail = email.getText().toString();
+        String userPassword = email.getText().toString();
+        if(userPassword.length() == 0 || userEmail.length() == 0) {
+            Toast toast = Toast.makeText(Login.this, "Email and Password must contain characters", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        else
+        {
+
+
+
         User user = new User(null, null, email.getText().toString(), password.getText().toString());
 
         Call<User> call = (Call<User>) app.hootService.authenticate(user);
@@ -42,19 +53,21 @@ public class Login extends AppCompatActivity {
                 // java.lang.NullPointerException: Attempt to read from field 'java.lang.String coady.mytweetapp.model.User.email' on a null object reference
                 // when user enters correct email but wrong password
                 if (app.validUser(user.email, user.password)) {
-                    startActivity (new Intent(Login.this, Timeline.class));
+                    startActivity(new Intent(Login.this, Timeline.class));
                 } else {
                     Toast toast = Toast.makeText(Login.this, "Invalid Credentials 1", Toast.LENGTH_SHORT);
                     toast.show();
                 }
+                //startActivity (new Intent(Login.this, Welcome.class));
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast toast = Toast.makeText(Login.this, "Invalid Credentials 2", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(Login.this, "Invalid Credentials: Incorrect e-mail", Toast.LENGTH_SHORT);
                 toast.show();
             }
         });
+        }
 
 /*        if (app.validUser(email.getText().toString(), password.getText().toString()))
         {
